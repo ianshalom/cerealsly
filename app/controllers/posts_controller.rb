@@ -19,8 +19,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(posts_params)
     @post.user = current_user
-    @post.save
-    redirect_to root_path
+
+   if @post.save
+      redirect_to @post
+    else
+      render 'new'
+    end
   end
 
   def update
