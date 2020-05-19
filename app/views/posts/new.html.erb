@@ -1,0 +1,24 @@
+<%= form_with scope: :post, url: posts_path, local: true do |form| %>
+
+
+<h1>Add a bowl</h1>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :img_url %><br>
+    <%= form.text_field :img_url %>
+  </p>
+
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %> 
