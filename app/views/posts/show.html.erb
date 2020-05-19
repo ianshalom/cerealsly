@@ -1,0 +1,28 @@
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+<p>
+  <strong>User:</strong>
+  <%= @post.user.username %>
+</p>
+
+<%= image_tag (@post.img_url), style: 'width: 200px; height: 170px' %>
+
+<p>
+  <%= @post.body %>
+</p>
+
+<table>
+  <tr>
+    <th>Comments</th>
+    <th>Username</th>
+  </tr>
+
+  <% @post.comments.each do |comment| %>
+    <tr>
+      <td><%= comment.content %></td>
+      <td><%= comment.user.username %></td>
+    </tr>
+  <% end %>
+</table>
