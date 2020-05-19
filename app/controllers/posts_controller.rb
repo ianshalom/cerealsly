@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @comments = Comment.all
   end
 
   def show
@@ -17,6 +18,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(posts_params)
+    @post.user = current_user
     @post.save
     redirect_to root_path
   end
