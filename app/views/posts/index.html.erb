@@ -8,7 +8,9 @@
 <%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
-<%= link_to 'Show', post_path(post) %>
+<p>by <%= post.user.username %></p>
+<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+<%= link_to 'View', post_path(post) %>
 </div>
 <% end %>
 <% else %>
@@ -19,7 +21,9 @@
 <%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
-<%= link_to 'Show', post_path(post) %>
+<p>by <%= post.user.username %></p>
+<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+<%= link_to 'View', post_path(post) %>
 </div>
 <% end %>
 <% end %>
