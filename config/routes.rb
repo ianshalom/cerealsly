@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  get '/profile' => 'pages#profile'
+  get '/profile/:id' => 'pages#profile'
+
 
   get '/posts' => 'posts#index', as: 'posts'
   get '/posts/new' => 'posts#new', as: 'new_post'
