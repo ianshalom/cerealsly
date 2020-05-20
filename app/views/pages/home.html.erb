@@ -1,14 +1,23 @@
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
-</div>
-<%= link_to 'Index', posts_path %>
-<% if user_signed_in? %>
-<% else %>
-<%= link_to 'Sign in', new_user_session_path %>
-<% end %>
+<body>
+  <div class="jumbotron bg-light">
+    <div>
+      <div class="col center-block" align="center">
+        <h1 class="display-4 text-dark">The dark sidegit of the spoon.</h1>
+        <p class="lead text-muted">Welcome to the most rigorously peer-reviewed cereal index on the web. Cerealsly.</p>
+      </div>
+      <hr class="my-4">
+      <div class="col center-block" align="center">
+        <p class="text-muted">Go to our index or sign in to continue.</p>
+        <div>
+          <div class="btn-group"> 
+
+          <%= link_to 'Index', posts_path, :class => 'btn btn-outline-success rounded-pill btn-lg mr-3' %>
+
+          <%= link_to 'Sign in', new_user_session_path, :class => 'btn btn-outline-success rounded-pill btn-lg ml-3' %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
