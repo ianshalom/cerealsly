@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @comment = Comment.find(params[:id])
   end
 
   def create
@@ -29,7 +30,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update
-    redirect_to root_path
+    redirect_to post_path(@comment.post)
   end
 
   def destroy
