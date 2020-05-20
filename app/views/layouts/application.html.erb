@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>cerealsly</title>
+    <title>Cerealsy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -23,5 +23,9 @@
 
     <%= yield %>
     <%= render 'layouts/footer' %>
+    <script>
+				$('.dropdown-toggle').dropdown()
+				$('.navbar-toggler').dropdown()
+    </script>
   </body>
 </html>
