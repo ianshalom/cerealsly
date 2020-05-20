@@ -2,7 +2,7 @@
 <% if user_signed_in? %>
 		<%= link_to 'Home', posts_path %>
 		<%= link_to 'Create Post', new_post_path %>
-		<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
+		<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
 	<% else %>
 		<%= link_to 'Home', posts_path %>
 	<% end %>
@@ -60,9 +60,9 @@
 				    <p class="mb-1"><%= comment.content %></p>
                     <small>by <%= comment.user.username %></small>
                   </a>
-                  <% if current_user == comment.user %>
+				  <% if current_user == comment.user %>
+				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
                     <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
-                    <%else%>
                     <% end %>
 		  </a>
 </div>
