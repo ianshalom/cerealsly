@@ -1,1 +1,16 @@
-@import 'bootstrap';
+@import "bootstrap";
+
+.navbar {
+	background-color: black;
+}
+
+.navbar-brand {
+	color: white;
+}
+.nav-link {
+	color: white;
+}
+
+#footer-text {
+	font-size: 50px;
+}

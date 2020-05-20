@@ -1,3 +1,15 @@
+
+<% if user_signed_in? %>
+		<%= link_to 'Home', posts_path %>
+		<%= link_to 'Create Post', new_post_path %>
+		<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
+	<% else %>
+		<%= link_to 'Home', posts_path %>
+		<% end %>
+
+
+
+
 <p>
   <strong>Title:</strong>
   <%= @post.title %>
@@ -13,6 +25,24 @@
   <%= @post.body %>
 </p>
 
+	<% if user_signed_in? %>
+<table>
+  <tr>
+    <th>Comments</th>
+    <th>Username</th>
+  </tr>
+<%= link_to 'Edit', edit_post_path(@post) %><br>
+<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %>
+  <% @post.comments.each do |comment| %>
+    <tr>
+      <td><%= comment.content %></td>
+      <td><%= comment.user.username %></td>
+    </tr>
+</table>
+
+<% end %>
+<% else %>
+
 <table>
   <tr>
     <th>Comments</th>
@@ -24,5 +54,7 @@
       <td><%= comment.content %></td>
       <td><%= comment.user.username %></td>
     </tr>
-  <% end %>
+<% end %>
 </table>
+
+<% end %>
