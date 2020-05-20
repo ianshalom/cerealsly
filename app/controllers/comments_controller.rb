@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      flash[:notice] = "Your comment has been successfully added."
         redirect_to post_path(@comment.post)
     else
       @post = Post.find(@comment.post.id)
