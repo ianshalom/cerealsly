@@ -19,8 +19,9 @@ class CommentsController < ApplicationController
     if @comment.save
         redirect_to post_path(@comment.post)
     else
-        @post = Post.all
-        render 'new'
+      @post = Post.find(@comment.post.id)
+      @comments = @post.comments
+        render :template => 'posts/show'
     end
   end
 

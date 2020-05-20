@@ -2,6 +2,7 @@
 
 
 <h1>Add a bowl</h1>
+<%= render 'shared/errors', obj: @post %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>
@@ -21,4 +22,4 @@
   <p>
     <%= form.submit %>
   </p>
-<% end %> 
+<% end %>

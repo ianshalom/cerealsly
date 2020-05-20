@@ -31,23 +31,18 @@
 
 <%= form_with scope: :comment, url: comments_path, local: true do |form| %>
 	<% if user_signed_in? %>
-			<p class="error">
-			  <%= show_errors(@comment, :content) %>
-			</p>
 
-<div class="form-group">
-   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
-    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
-     	<%= form.hidden_field :post_id, value: @post.id %>
-  </div>
- <div class="form-group">
-			  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
-			  </div>
-</form>
+	<%= render 'shared/errors', obj: @comment %>
 
-
-
-
+		<div class="form-group">
+		   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
+		    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+		     	<%= form.hidden_field :post_id, value: @post.id %>
+		  </div>
+		 <div class="form-group">
+					  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
+					  </div>
+		</form>
 
 	<div class="comment-header">
 	<h2 >Comments</h2></div>
