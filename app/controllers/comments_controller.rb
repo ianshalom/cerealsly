@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     else
       @post = Post.find(@comment.post.id)
       @comments = @post.comments
-        render :template => 'posts/show'
+      render :template => 'posts/show'
     end
   end
 
