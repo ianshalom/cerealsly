@@ -5,9 +5,7 @@
 		<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
 	<% else %>
 		<%= link_to 'Home', posts_path %>
-		<% end %>
-
-
+	<% end %>
 
 
 <p>
@@ -25,40 +23,42 @@
   <%= @post.body %>
 </p>
 
+<% if current_user == @post.user %>
 		<button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_post_path(@post) %></button>
-		<button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+        <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+<% end %>
+
 
 <%= form_with scope: :comment, url: comments_path, local: true do |form| %>
 	<% if user_signed_in? %>
-			<p class="error">
-			  <%= show_errors(@comment, :content) %>
-			</p>
 
-<div class="form-group">
-   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
-    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
-     	<%= form.hidden_field :post_id, value: @post.id %>
-  </div>
- <div class="form-group">
-			  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
-			  </div>
-</form>
+	<%= render 'shared/errors', obj: @comment %>
 
-
-
-
+		<div class="form-group">
+		   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
+		    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+		     	<%= form.hidden_field :post_id, value: @post.id %>
+		  </div>
+		 <div class="form-group">
+					  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
+					  </div>
+		</form>
 
 	<div class="comment-header">
 	<h2 >Comments</h2></div>
-		<% @comments.each do |comment| %>
+        <% @comments.each do |comment| %>
 				<div class="list-group">
 				  <a href="#" class="list-group-item list-group-item-action">
 				    <div class="d-flex w-100 justify-content-between">
 				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
 				    </div>
 				    <p class="mb-1"><%= comment.content %></p>
-				    <small>by <%= comment.user.username %></small>
-				  </a>
+                    <small>by <%= comment.user.username %></small>
+                  </a>
+                  <% if current_user == comment.user %>
+                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+                    <%else%>
+                    <% end %>
 		  </a>
 </div>
 
@@ -70,14 +70,19 @@
   <div class="comment-header">
 	<h2 >Comments</h2></div>
 		<% @comments.each do |comment| %>
-				<div class="list-group">
+                <div class="list-group">
 				  <a href="#" class="list-group-item list-group-item-action">
 				    <div class="d-flex w-100 justify-content-between">
 				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
 				    </div>
 				    <p class="mb-1"><%= comment.content %></p>
-				    <small>by <%= comment.user.username %></small>
-				  </a>
+                    <small>by <%= comment.user.username %></small>
+                    <small>by <%= comment.user.username %></small>
+                  </a>
+                  <% if current_user == comment.user %>
+                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+                    <%else%>
+                    <% end %>
 		  </a>
 </div>
 <% end %>
