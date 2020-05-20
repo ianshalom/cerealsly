@@ -4,6 +4,10 @@ class PostsController < ApplicationController
     @posts = Post.all
     @comments = Comment.all
     @users = User.all
+    @user = current_user
+    puts '######################'
+    puts @user.id
+    puts '######################'
   end
 
   def show
