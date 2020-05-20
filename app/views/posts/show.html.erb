@@ -25,36 +25,62 @@
   <%= @post.body %>
 </p>
 
+		<button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_post_path(@post) %></button>
+		<button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+
+<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
 	<% if user_signed_in? %>
-<table>
-  <tr>
-    <th>Comments</th>
-    <th>Username</th>
-  </tr>
-<%= link_to 'Edit', edit_post_path(@post) %><br>
-<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %>
-  <% @post.comments.each do |comment| %>
-    <tr>
-      <td><%= comment.content %></td>
-      <td><%= comment.user.username %></td>
-    </tr>
-</table>
+			<p class="error">
+			  <%= show_errors(@comment, :content) %>
+			</p>
+
+<div class="form-group">
+   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
+    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+     	<%= form.hidden_field :post_id, value: @post.id %>
+  </div>
+ <div class="form-group">
+			  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
+			  </div>
+</form>
+
+
+
+
+
+	<div class="comment-header">
+	<h2 >Comments</h2></div>
+		<% @comments.each do |comment| %>
+				<div class="list-group">
+				  <a href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+				    <small>by <%= comment.user.username %></small>
+				  </a>
+		  </a>
+</div>
 
 <% end %>
+
+
 <% else %>
 
-<table>
-  <tr>
-    <th>Comments</th>
-    <th>Username</th>
-  </tr>
-
-  <% @post.comments.each do |comment| %>
-    <tr>
-      <td><%= comment.content %></td>
-      <td><%= comment.user.username %></td>
-    </tr>
+  <div class="comment-header">
+	<h2 >Comments</h2></div>
+		<% @comments.each do |comment| %>
+				<div class="list-group">
+				  <a href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+				    <small>by <%= comment.user.username %></small>
+				  </a>
+		  </a>
+</div>
 <% end %>
-</table>
 
+<% end %>
 <% end %>

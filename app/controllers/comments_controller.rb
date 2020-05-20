@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
   end
 
   def new
+    @comments = Comment.all
   end
 
   def edit
@@ -12,8 +13,14 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comments_params)
-    @comment.save
-    redirect_to root_path
+    @comment.user = current_user
+
+    if @comment.save
+      redirect_to root_path
+  else
+      @post = Post.all
+      render 'new'
+  end
   end
 
   def update
