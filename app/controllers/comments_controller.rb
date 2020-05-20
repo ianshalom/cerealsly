@@ -13,14 +13,16 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comments_params)
+
     @comment.user = current_user
 
     if @comment.save
-      redirect_to root_path
-  else
-      @post = Post.all
-      render 'new'
-  end
+        redirect_to post_path(@comment.post)
+    else
+      @post = Post.find(@comment.post.id)
+      @comments = @post.comments
+      render :template => 'posts/show'
+    end
   end
 
   def update
@@ -30,6 +32,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    redirect_to post_path(@comment.post)
   end
 
   private
