@@ -26,6 +26,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
    if @post.save
+    flash[:notice] = "Post was created successfully."
       redirect_to @post
     else
       render 'new'
@@ -37,6 +38,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.update(posts_params)
+      flash[:notice] = "Post was updated successfully."
       redirect_to @post
     else
       render 'edit'
