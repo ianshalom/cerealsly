@@ -1,31 +1,31 @@
-<h1>NINE NINNE INDEX PAGE</h1>
 
-	<% if user_signed_in? %>
-<%= link_to 'Create Post', new_post_path %>
-<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
-<%= link_to 'My Profile', profile_path(@user.id) %>
-<h2>Welcome <%= @user.username %>!</h2>
-<% @posts.each do |post| %>
-<div style="border: 2px solid">
-<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
-<p>Title: <%= post.title %></p>
-<p>Body: <%= post.body %></p>
-<p>by <%= post.user.username %></p>
-<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-<%= link_to 'View', post_path(post) %>
-</div>
-<% end %>
+
+<% if user_signed_in? %>
+			<%= link_to 'Create Post', new_post_path %>
+			<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
+			<%= link_to 'My Profile', profile_path(@user.id) %>
+			<h2>Welcome <%= @user.username %>!</h2>
+			<% @posts.each do |post| %>
+			<div style="border: 2px solid">
+			<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
+			<p>Title: <%= post.title %></p>
+			<p>Body: <%= post.body %></p>
+			<p>by <%= link_to post.user.username , profile_path(post.user.id) %></p>
+			<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+			<%= link_to 'View', post_path(post) %>
+			</div>
+			<% end %>
 <% else %>
-<%= link_to 'Sign in', new_user_session_path %>
-<%= link_to 'Sign up', new_user_registration_path %>
-<% @posts.each do |post| %>
-<div style="border: 2px solid">
-<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
-<p>Title: <%= post.title %></p>
-<p>Body: <%= post.body %></p>
-<p>by <%= post.user.username %></p>
-<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-<%= link_to 'View', post_path(post) %>
-</div>
-<% end %>
+			<%= link_to 'Sign in', new_user_session_path %>
+			<%= link_to 'Sign up', new_user_registration_path %>
+			<% @posts.each do |post| %>
+			<div style="border: 2px solid">
+			<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
+			<p>Title: <%= post.title %></p>
+			<p>Body: <%= post.body %></p>
+			<p>by <%= post.user.username %></p>
+			<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+			<%= link_to 'View', post_path(post) %>
+			</div>
+		<% end %>
 <% end %>
