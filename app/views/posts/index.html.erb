@@ -4,6 +4,7 @@
 <%= link_to 'Create Post', new_post_path %>
 <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
 <%= link_to 'My Profile', profile_path(@user.id) %>
+<h2>Welcome <%= @user.username %>!</h2>
 <% @posts.each do |post| %>
 <div style="border: 2px solid">
 <%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
