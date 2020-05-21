@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @post = @comment.post
   end
 
   def create
@@ -28,8 +29,14 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update
-    redirect_to post_path(@comment.post)
+    @post = @comment.post
+  
+    if @comment.update(comments_params)
+      flash[:notice] = "Comment was updated successfully."
+      redirect_to @post
+    else
+      render 'edit'
+    end
   end
 
   def destroy
