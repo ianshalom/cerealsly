@@ -84,7 +84,7 @@
 
 
 	<h2 >Comments</h2></div>
-        <% post.comments.each do |comment| %>
+        <% post.comments.order(:created_at).reverse.each do |comment| %>
 				<div class="list-group">
 				  <div href="#" class="list-group-item list-group-item-action">
 				    <div class="d-flex w-100 justify-content-between">
@@ -106,7 +106,7 @@
 <% else %>
 
 <h2 >Comments</h2></div>
-        <% post.comments.each do |comment| %>
+        <% post.comments.order(:created_at).reverse.each do |comment| %>
 				<div class="list-group">
 				  <div href="#" class="list-group-item list-group-item-action">
 				    <div class="d-flex w-100 justify-content-between">
