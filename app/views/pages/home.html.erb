@@ -1,4 +1,47 @@
 <body>
+	<% if user_signed_in? %>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <a class="navbar-brand text-success" href="#">cerealsly</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
+			      </li>
+
+			    </ul>
+			  </div>
+			</nav>
+
+			<% else %>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			  <a class="navbar-brand text-success" href="#">cerealsly</a>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			       <li class="nav-item">
+			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+			<% end %>
+
+
   <div class="jumbotron bg-light">
     <div>
       <div class="col center-block" align="center">
@@ -11,9 +54,17 @@
         <div>
           <div class="btn-group">
 
+			<% if user_signed_in? %>
+
+					<%= link_to 'Index', posts_path, :class => 'btn btn-outline-success rounded-pill btn-lg mr-3' %>
+
+          <% else %>
+
           <%= link_to 'Index', posts_path, :class => 'btn btn-outline-success rounded-pill btn-lg mr-3' %>
 
           <%= link_to 'Sign in', new_user_session_path, :class => 'btn btn-outline-success rounded-pill btn-lg ml-3' %>
+
+					<% end %>
 
           </div>
         </div>
