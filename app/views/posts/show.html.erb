@@ -24,8 +24,9 @@
 </p>
 
 <% if current_user == @post.user %>
-		<button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_post_path(@post) %></button>
-        <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', post_path(@post), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+
+		<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-dark' %>
+		<%= link_to 'Delete', post_path(@post), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
 <% end %>
 
 
