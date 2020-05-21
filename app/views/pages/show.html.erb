@@ -18,21 +18,9 @@
 <p>Body: <%= post.body %></p>
 <p>by <%= post.user.username %></p>
 <small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-<%= link_to 'View', post_path(post) %>
-
-<h4>Comments</h4>
-<% post.comments.each do |comment| %>
-<p><%= comment.content %><small>by <%= comment.user.username %></small></p>
-
+<%= link_to 'View Post', post_path(post) %>
 
 </div>
-<% end %>
-
-
-
-
-
-
 
 <%= form_with scope: :comment, url: comments_path, local: true do |form| %>
 <% if user_signed_in? %>
@@ -66,10 +54,11 @@
                   </div>
 
 				  <% if current_user == comment.user %>
-				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
-                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment, :from => 'profile'), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
-                    <% end %>
-		  </a>
+				  <div>
+				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
+				  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
+				  </div>
+                <% end %>
 		<% end %>
 </div>
 
@@ -87,10 +76,9 @@
                   </div>
 
 				  <% if current_user == comment.user %>
-				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
-                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment, :from => 'profile'), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
+                  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
                     <% end %>
-		  </a>
 <% end %>
 </div>
 
