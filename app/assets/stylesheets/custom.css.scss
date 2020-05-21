@@ -1,8 +1,14 @@
 @import "bootstrap";
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
 	background-color:#f8f9fa !important;
-	height: 100%
+	// height: 100%;
+	margin-bottom: 60px !important;
 }
 
 .navbar {
@@ -18,9 +24,17 @@ body {
 	color: #a6a6a6;
 }
 
+footer {
+	position: absolute !important;
+	bottom: 0 !important;
+	height: 60px !important;
+}
+
 #footer-text {
 	font-size: 10px;
 }
+
+
 
 .btn {
 	width: 200px
