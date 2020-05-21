@@ -1,5 +1,6 @@
 <%= form_with scope: :post, url: posts_path, local: true do |form| %>
 
+  <%= form_for @post do |form| %>
 
 <h1>Add a bowl</h1>
 <%= render 'shared/errors', obj: @post %>
@@ -14,12 +15,31 @@
   </p>
 
   <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
+  	<%= form.label :body %><br>
+    <%= form.text_area :body,  maxlength: @maximum_length, id: 'body' %><br>
+    <small>Characters left: <span id="counter" data-maximum-length="<%= @maximum_length %>"><%= @maximum_length %></span></small>
+
   </p>
 
 
   <p>
     <%= form.submit %>
   </p>
+
+  <% end %>
+
+
 <% end %>
+
+<script>
+    $(document).ready(function() {
+      var body = $("#body");
+      var counter     = $("#counter");
+      var max_length  = counter.data("maximum-length");
+      counter.text(max_length - body.val().length);
+      body.keyup(function() {
+          counter.text(max_length - $(this).val().length);
+      });
+
+    });
+</script>

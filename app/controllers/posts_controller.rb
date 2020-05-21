@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-
+    @maximum_length = Post.validators_on( :body ).first.options[:maximum]
   end
 
   def edit
