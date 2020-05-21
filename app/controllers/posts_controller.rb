@@ -5,15 +5,13 @@ class PostsController < ApplicationController
     @comments = Comment.all
     @users = User.all
     @user = current_user
-    puts '######################'
-    puts @user.id
-    puts '######################'
+
   end
 
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.where(post_id: @post.id)
-
+    @comments = Comment.where(post_id: @post.id).order(:created_at).reverse
+    @user = current_user
   end
 
   def new

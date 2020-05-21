@@ -1,8 +1,16 @@
 
-<%= link_to 'Create Post', new_post_path %>
-<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
+
+<% if user_signed_in? %>
+	<%= link_to 'Home', posts_path %>
+	<%= link_to 'Create Post', new_post_path %>
+	<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
+<% else %>
+		<%= link_to 'Home', posts_path %>
+<% end %>
+
 
 <% @posts.each do |post| %>
+
 <div style="border: 2px solid">
 <%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
 
@@ -25,4 +33,67 @@
 
 
 
+
+<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
+<% if user_signed_in? %>
+
+<% if @comment %>
+			<%= render 'shared/errors', obj: @comment %>
+<% end %>
+
+
+		<div class="form-group">
+		   <%= form.label :content, class: 'col-2 col-form-label text-light' %>
+		   <%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+		   <%= form.hidden_field :post_id, value: post.id %>
+		  </div>
+		 <div class="form-group">
+					  <%= form.submit class: "btn btn-outline-dark btn-lg" %>
+					  </div>
+		</form>
+
+
+
+	<h2 >Comments</h2></div>
+        <% post.comments.each do |comment| %>
+				<div class="list-group">
+				  <div href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+                  </div>
+
+				  <% if current_user == comment.user %>
+				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
+                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment, :from => 'profile'), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+                    <% end %>
+		  </a>
+		<% end %>
+</div>
+
+<% else %>
+
+<h2 >Comments</h2></div>
+        <% post.comments.each do |comment| %>
+				<div class="list-group">
+				  <div href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+                  </div>
+
+				  <% if current_user == comment.user %>
+				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
+                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment, :from => 'profile'), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
+                    <% end %>
+		  </a>
+<% end %>
+</div>
+
+<% end %>
+<% end %>
 <% end %>
