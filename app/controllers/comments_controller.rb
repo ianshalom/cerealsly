@@ -14,17 +14,16 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comments_params)
-
     @comment.user = current_user
 
     if @comment.save
-      flash[:notice] = "Your comment has been successfully added."
-        redirect_to post_path(@comment.post)
-    else
-      @post = Post.find(@comment.post.id)
-      @comments = @post.comments
-      render :template => 'posts/show'
-    end
+          flash[:notice] = "Your comment has been successfully added."
+            redirect_back(fallback_location: root_path)
+        else
+          @post = Post.find(@comment.post.id)
+          @comments = @post.comments
+          render :template => 'posts/show'
+      end
   end
 
   def update
@@ -34,10 +33,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # puts '##############'
-    # puts
-    # puts '##############'
-
 
     @comment = Comment.find(params[:id])
     @comment.destroy
