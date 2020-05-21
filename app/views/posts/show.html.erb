@@ -61,6 +61,7 @@
 				    <p class="mb-1"><%= comment.content %></p>
                     <small>by <%= comment.user.username %></small>
                   </a>
+			<%= link_to comment.user.username, profile_path(comment.user.id) %>
 				  <% if current_user == comment.user %>
 				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
                     <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
@@ -83,7 +84,7 @@
 				    </div>
 				    <p class="mb-1"><%= comment.content %></p>
                     <small>by <%= comment.user.username %></small>
-                    <small>by <%= comment.user.username %></small>
+
                   </a>
 
 		  </a>
