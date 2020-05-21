@@ -8,8 +8,9 @@ class PagesController < ApplicationController
     puts '####################'
     puts @posts.first.comments
     puts '####################'
-
   end
+
+
 
 
 end
