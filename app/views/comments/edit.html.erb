@@ -1,1 +1,42 @@
-<h1>Fuck you thunder</h1>
+<% if user_signed_in? %>
+<%= link_to 'Home', posts_path %>
+<%= link_to 'Create Post', new_post_path %>
+<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+<% end %>
+
+<p>
+<strong>Title:</strong>
+<%= @post.title %>
+</p>
+<p>
+<strong>User:</strong>
+<%= @post.user.username %>
+</p>
+
+<%= image_tag (@post.img_url), style: 'width: 200px; height: 170px' %>
+
+<p>
+<%= @post.body %>
+</p>
+
+<%= form_with scope: :comment, model: @comment, local: true do |form| %>
+
+<% if user_signed_in? %>
+
+<% if @comment %>
+    <%= render 'shared/errors', obj: @comment %>
+<% end %>
+
+
+<div class="form-group">
+
+           <%= form.label :content, class: 'col-2 col-form-label text-light' %>
+        <%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+         <%= form.hidden_field :post_id, value: @post.id %>
+  </div>
+ <div class="form-group">
+              <%= form.submit class: "btn btn-outline-dark btn-lg " %>
+              </div>
+</form>
+<%end%>
+<%end%>
