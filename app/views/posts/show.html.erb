@@ -60,15 +60,14 @@
 				    </div>
 				    <p class="mb-1"><%= comment.content %></p>
                     <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-                  </div>
-
+				  </div>
+				  <div>
 				  <% if current_user == comment.user %>
-				  <button type="button" class="btn btn-outline-dark"><%= link_to 'Edit', edit_comment_path(comment) %></button>
-                    <button type="button" class="btn btn-outline-dark">	<%= link_to 'Delete', comment_path(comment), method: :delete, data:{ confirm: 'Are you sure?' } %></button>
-                    <% end %>
-		  </a>
-</div>
-
+				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
+                  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
+				  <% end %>
+				  </div>
+				</div>
 <% end %>
 
 
