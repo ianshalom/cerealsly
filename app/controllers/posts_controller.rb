@@ -15,12 +15,14 @@ class PostsController < ApplicationController
   end
 
   def new
+    @user = current_user
     @post = Post.new
     @maximum_length = Post.validators_on( :body ).first.options[:maximum]
   end
 
   def edit
     @post = Post.find(params[:id])
+    @user = current_user
   end
 
   def create

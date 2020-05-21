@@ -1,3 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			    	<li class="nav-item">
+			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+
+			    </ul>
+			  </div>
+			</nav>
 
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -6,7 +23,7 @@
     <% flash.each do |key, value| %>
        <div class="flash <%= key %>"><%= value %></div>
     <% end %>
-  
+
 
   <div class="col center-block pt-5" align="center">
 
@@ -17,7 +34,7 @@
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
-    
+
 
     <div class="field">
       <%= f.label :password %><br />
