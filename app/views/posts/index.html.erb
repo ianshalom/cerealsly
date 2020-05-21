@@ -25,6 +25,7 @@
 			<p>Body: <%= post.body %></p>
 			<p>by <%= post.user.username %></p>
 			<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+			<p>by <%= link_to post.user.username , profile_path(post.user.id) %></p>
 			<%= link_to 'View', post_path(post) %>
 			</div>
 		<% end %>
