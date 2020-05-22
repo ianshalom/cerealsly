@@ -1,63 +1,91 @@
+
+
 <% if user_signed_in? %>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			    <span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse" id="navbarNav">
-			    <ul class="navbar-nav">
-			      <li class="nav-item">
-			        <%= link_to 'Create', new_post_path, class: 'nav-link' %>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
-			      </li>
 
-			    </ul>
-			  </div>
-			</nav>
 
-			<% else %>
+		<div class="col center-block pt-5" align="center">
 
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			    <span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse" id="navbarNav">
-			    <ul class="navbar-nav">
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
-			      </li>
-			       <li class="nav-item">
-			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
-			      </li>
-			    </ul>
-			  </div>
-			</nav>
+			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
+
+			<%= link_to 'Create Post', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+			<%= link_to 'My Profile', profile_path(@user.id), :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+			<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+		</div>
+
+		<div class="container pt-5">		
+
+			<% @posts.in_groups_of(3, false).each do |group| %>
+
+			<%# <div class="container"> %>
+
+				<div class="row justify-content-md-center">
+				
+					
+					
+				<% @posts.each do |post| %>
+
+					<div class="col-md-3 d-flex align-items-stretch">	
+
+						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
+						
+
+							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
+							
+							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
+
+							<p class="card-text text-center"><%= post.body %></p>
+
+							<p class="text-center">by <%= link_to post.user.username , profile_path(post.user.id) %></p>
+
+							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+
+							<%# <div class="position-absolute bm-0"> %>
+
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+
+							<%# </div> %>
+
+						</div>
+
+					</div>
+
+					<% end %> 
+
+				</div>
+
+			<%# </div> %>
+
 			<% end %>
 
-<% if user_signed_in? %>
+			</div>
+
+
+				
+
+
+		
+
+		
+
+<% else %>
+			<%= link_to 'Sign in', new_user_session_path %>
+			<%= link_to 'Sign up', new_user_registration_path %>
+
 		<h2>Welcome <%= @user.username %>!</h2>
 	<% end %>
+
 
 			<% @posts.each do |post| %>
 			<div style="border: 2px solid">
 			<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
 			<p>Title: <%= post.title %></p>
 			<p>Body: <%= post.body %></p>
-			<p>by <%= link_to post.user.username , profile_path(post.user.id) %></p>
+			<p>by <%= post.user.username %></p>
 			<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+			<p>by <%= link_to post.user.username , profile_path(post.user.id) %></p>
 			<%= link_to 'View', post_path(post) %>
 			</div>
-
-<% end %>
+		<% end %>

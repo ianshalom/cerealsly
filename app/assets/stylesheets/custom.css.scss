@@ -34,7 +34,18 @@ footer {
 	font-size: 10px;
 }
 
+// .row {
+// 	display: flex;
+// 	flex-wrap: wrap;
+// }
 
+// .row > div[class*='col'] {
+//  display: flex;
+// }
+
+// .card {
+// 	min-height: 450px;
+// }
 
 .btn {
 	width: 200px
@@ -54,4 +65,12 @@ h1 {
 
 h2 {
 	font-family: 'Rubik Mono One', sans-serif;
+}
+
+h5 {
+	font-family: 'Rubik Mono One', sans-serif;
+}
+
+#greeting {
+	font-family: 'Bowlby One SC', cursive !important;
 }
