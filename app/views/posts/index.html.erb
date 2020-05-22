@@ -87,7 +87,7 @@
     					<!--Card image-->
     					<div>
 
-								<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
+								<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3 img-fluid' %>
 
 							</div>
 
@@ -101,12 +101,12 @@
 								<p class="card-text"><%= post.body %></p>
 
 								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
-								
+
 								<br>
-								
+
 								<%# < View button, stretched link makes whole div clickable > %>
 								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-light rounded-pill btn-sm mt-auto stretched-link' %>
-								
+
 
 							</div>
 
@@ -122,7 +122,7 @@
 
 
 
-			
+
 
 			</div>
 
@@ -131,4 +131,3 @@
         <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 
       </div>
-
