@@ -49,80 +49,54 @@
 			</nav>
 			<% end %>
 
+			<div class="col center-block pt-5" align="center">
 
-<% @posts.each do |post| %>
+			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
 
-<div style="border: 2px solid">
-<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
-
-<p>Title: <%= post.title %></p>
-<p>Body: <%= post.body %></p>
-<p>by <%= post.user.username %></p>
-<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-<%= link_to 'View Post', post_path(post) %>
-
-</div>
-
-<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
-<% if user_signed_in? %>
-
-<% if @comment %>
-			<%= render 'shared/errors', obj: @comment %>
-<% end %>
-
-
-		<div class="form-group">
-		   <%= form.label :content, class: 'col-2 col-form-label text-light' %>
-		   <%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
-		   <%= form.hidden_field :post_id, value: post.id %>
-		  </div>
-		 <div class="form-group">
-					  <%= form.submit class: "btn btn-outline-dark btn-lg" %>
-					  </div>
-		</form>
+		</div>
 
 
 
-	<h2 >Comments</h2></div>
-        <% post.comments.order(:created_at).reverse.each do |comment| %>
-				<div class="list-group">
-				  <div href="#" class="list-group-item list-group-item-action">
-				    <div class="d-flex w-100 justify-content-between">
-				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-				    </div>
-				    <p class="mb-1"><%= comment.content %></p>
-                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-                  </div>
+		<div class="container pt-5">
 
-				  <% if current_user == comment.user %>
-				  <div>
-				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
-				  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
-				  </div>
-                <% end %>
-		<% end %>
-</div>
+			
 
-<% else %>
+			<%# <div class="container"> %>
 
-<h2 >Comments</h2></div>
-        <% post.comments.order(:created_at).reverse.each do |comment| %>
-				<div class="list-group">
-				  <div href="#" class="list-group-item list-group-item-action">
-				    <div class="d-flex w-100 justify-content-between">
-				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-				    </div>
-				    <p class="mb-1"><%= comment.content %></p>
-                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-                  </div>
+				<div class="row justify-content-md-center">
 
-				  <% if current_user == comment.user %>
-				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
-                  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
-                    <% end %>
-<% end %>
-</div>
 
-<% end %>
-<% end %>
-<% end %>
+
+				<% @posts.each do |post| %>
+
+					<div class="col-md-3 d-flex align-items-stretch">
+
+						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
+
+
+							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
+
+							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
+
+							<p class="card-text text-center"><%= post.body %></p>
+
+							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+
+							<%# <div class="position-absolute bm-0"> %>
+
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+							<p>  </p>
+
+							<%# </div> %>
+
+						</div>
+
+					</div>
+
+				<% end %>
+
+				</div>
+
+			<%# </div> %>
+
+		</div>
