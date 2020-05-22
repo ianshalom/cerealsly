@@ -47,6 +47,7 @@
 			<% end %>
 
 
+<div class="col center-block pt-5" align="center">
 <%= form_with scope: :post, url: posts_path, local: true do |form| %>
 
   <%= form_for @post do |form| %>
@@ -72,13 +73,18 @@
 
 
   <p>
-    <%= form.submit %>
+  	<%= form.submit "Create Bowl", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
   </p>
 
   <% end %>
 
+    <div class="row justify-content-md-center pt-5">
+        <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+	</div>
+
 
 <% end %>
+</div>
 
 <script>
     $(document).ready(function() {
