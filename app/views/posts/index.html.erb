@@ -1,20 +1,74 @@
 
 
 <% if user_signed_in? %>
-			<%= link_to 'Create Post', new_post_path %>
-			<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
-			<%= link_to 'My Profile', profile_path(@user.id) %>
-			<h2>Welcome <%= @user.username %>!</h2>
-			<% @posts.each do |post| %>
-			<div style="border: 2px solid">
-			<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
-			<p>Title: <%= post.title %></p>
-			<p>Body: <%= post.body %></p>
-			<p>by <%= link_to post.user.username , profile_path(post.user.id) %></p>
-			<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-			<%= link_to 'View', post_path(post) %>
-			</div>
+
+		<div class="col center-block pt-5" align="center">
+
+			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
+
+			<%= link_to 'Create Post', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+			<%= link_to 'My Profile', profile_path(@user.id), :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+			<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, :class => 'btn btn-outline-success rounded-pill btn-sm' %>
+
+		</div>
+
+		<div class="container pt-5">		
+
+			<% @posts.in_groups_of(3, false).each do |group| %>
+
+			<%# <div class="container"> %>
+
+				<div class="row justify-content-md-center">
+				
+					
+					
+				<% @posts.each do |post| %>
+
+					<div class="col-md-3 d-flex align-items-stretch">	
+
+						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
+						
+
+							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
+							
+							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
+
+							<p class="card-text text-center"><%= post.body %></p>
+
+							<p class="text-center">by <%= link_to post.user.username , profile_path(post.user.id) %></p>
+
+							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+
+							<%# <div class="position-absolute bm-0"> %>
+
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+
+							<%# </div> %>
+
+						</div>
+
+					</div>
+
+					<% end %> 
+
+				</div>
+
+			<%# </div> %>
+
 			<% end %>
+
+			</div>
+
+
+				
+
+
+		
+
+		
+
 <% else %>
 			<%= link_to 'Sign in', new_user_session_path %>
 			<%= link_to 'Sign up', new_user_registration_path %>
