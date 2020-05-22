@@ -50,13 +50,6 @@
 			<% end %>
 
 
-
-
-
-
-
-
-
 <% if user_signed_in? %>
 
 
@@ -64,8 +57,16 @@
 
 			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
 
+		</div>
+<% else %>
+		<div class="col center-block pt-5" align="center">
+
+			<h2 id="greeting">Pick A Bowl</h2>
 
 		</div>
+
+
+<% end %>
 
 		<div class="container pt-5">
 
@@ -97,6 +98,7 @@
 							<%# <div class="position-absolute bm-0"> %>
 
 								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+							<p>  </p>
 
 							<%# </div> %>
 
@@ -113,5 +115,3 @@
 			
 
 			</div>
-
-<% end %>
