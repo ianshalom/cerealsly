@@ -51,7 +51,7 @@
 
 			<% end %>
 
-
+<div class="col center-block pt-5" align="center">
 <%= form_with scope: :post, model: @post, local: true do |form| %>
 <div class="container">
 <h1>Top up a bowl</h1>
@@ -73,11 +73,13 @@
 
 
   <p>
-    <%= form.submit %>
+  <%= form.submit "Edit Bowl", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
   </p>
 </div>
   <% end %>
+  </div>
 
-  <div class="row justify-content-md-center pt-5">
+
+<div class="row justify-content-md-center pt-5">
         <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-        </div>
+</div>
