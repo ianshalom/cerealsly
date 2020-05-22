@@ -1,21 +1,128 @@
-
-
 <% if user_signed_in? %>
-	<%= link_to 'Home', posts_path %>
-	<%= link_to 'Create Post', new_post_path %>
-	<%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete %>
-<% else %>
-		<%= link_to 'Home', posts_path %>
-<% end %>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			    	<li class="nav-item">
+			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Create', new_post_path, class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
+			      </li>
+
+			    </ul>
+			  </div>
+			</nav>
+
+			<% else %>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+			      </li>
+			       <li class="nav-item">
+			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+			<% end %>
 
 
 <% @posts.each do |post| %>
+
 <div style="border: 2px solid">
 <%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
 
 <p>Title: <%= post.title %></p>
 <p>Body: <%= post.body %></p>
 <p>by <%= post.user.username %></p>
+<small>Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+<%= link_to 'View Post', post_path(post) %>
+
+</div>
+
+<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
+<% if user_signed_in? %>
+
+<% if @comment %>
+			<%= render 'shared/errors', obj: @comment %>
+<% end %>
 
 
+		<div class="form-group">
+		   <%= form.label :content, class: 'col-2 col-form-label text-light' %>
+		   <%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
+		   <%= form.hidden_field :post_id, value: post.id %>
+		  </div>
+		 <div class="form-group">
+					  <%= form.submit class: "btn btn-outline-dark btn-lg" %>
+					  </div>
+		</form>
+
+
+
+	<h2 >Comments</h2></div>
+        <% post.comments.order(:created_at).reverse.each do |comment| %>
+				<div class="list-group">
+				  <div href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+                  </div>
+
+				  <% if current_user == comment.user %>
+				  <div>
+				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
+				  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
+				  </div>
+                <% end %>
+		<% end %>
+</div>
+
+<% else %>
+
+<h2 >Comments</h2></div>
+        <% post.comments.order(:created_at).reverse.each do |comment| %>
+				<div class="list-group">
+				  <div href="#" class="list-group-item list-group-item-action">
+				    <div class="d-flex w-100 justify-content-between">
+				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+				    </div>
+				    <p class="mb-1"><%= comment.content %></p>
+                   <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+                  </div>
+
+				  <% if current_user == comment.user %>
+				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
+                  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
+                    <% end %>
+<% end %>
+</div>
+
+<% end %>
+<% end %>
 <% end %>

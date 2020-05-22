@@ -10,34 +10,46 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @post = @comment.post
   end
 
   def create
     @comment = Comment.new(comments_params)
-
     @comment.user = current_user
 
     if @comment.save
-      flash[:notice] = "Your comment has been successfully added."
-        redirect_to post_path(@comment.post)
-    else
-      @post = Post.find(@comment.post.id)
-      @comments = @post.comments
-      render :template => 'posts/show'
-    end
+          flash[:notice] = "Your comment has been successfully added."
+            redirect_back(fallback_location: root_path)
+        else
+          @post = Post.find(@comment.post.id)
+          @comments = @post.comments
+          render :template => 'posts/show'
+      end
   end
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.update
-    redirect_to post_path(@comment.post)
+    @post = @comment.post
+  
+    if @comment.update(comments_params)
+      flash[:notice] = "Comment was updated successfully."
+      redirect_to @post
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+
     @comment = Comment.find(params[:id])
     @comment.destroy
+    if params[:from]
+      redirect_to profile_path(current_user)
+      flash[:notice] = "Comment was deleted successfully."
+    else
     flash[:notice] = "Comment was deleted successfully."
     redirect_to post_path(@comment.post)
+  end
   end
 
   private

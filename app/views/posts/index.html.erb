@@ -2,6 +2,7 @@
 
 <% if user_signed_in? %>
 
+
 		<div class="col center-block pt-5" align="center">
 
 			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
@@ -72,6 +73,11 @@
 <% else %>
 			<%= link_to 'Sign in', new_user_session_path %>
 			<%= link_to 'Sign up', new_user_registration_path %>
+
+		<h2>Welcome <%= @user.username %>!</h2>
+	<% end %>
+
+
 			<% @posts.each do |post| %>
 			<div style="border: 2px solid">
 			<%= image_tag (post.img_url), style: 'width: 200px; height: 170px' %>
@@ -83,4 +89,3 @@
 			<%= link_to 'View', post_path(post) %>
 			</div>
 		<% end %>
-<% end %>

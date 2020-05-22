@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(:created_at).reverse
     @comments = Comment.all
     @users = User.all
     @user = current_user
@@ -10,17 +10,19 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = Comment.where(post_id: @post.id)
-
+    @comments = Comment.where(post_id: @post.id).order(:created_at).reverse
+    @user = current_user
   end
 
   def new
+    @user = current_user
     @post = Post.new
-
+    @maximum_length = Post.validators_on( :body ).first.options[:maximum]
   end
 
   def edit
     @post = Post.find(params[:id])
+    @user = current_user
   end
 
   def create

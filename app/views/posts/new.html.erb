@@ -1,5 +1,55 @@
+<% if user_signed_in? %>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			    	<li class="nav-item">
+			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
+			      </li>
+
+			    </ul>
+			  </div>
+			</nav>
+
+			<% else %>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav">
+			      <li class="nav-item">
+			        <a class="nav-link" href="#">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
+			      </li>
+			       <li class="nav-item">
+			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+			<% end %>
+
+
 <%= form_with scope: :post, url: posts_path, local: true do |form| %>
 
+  <%= form_for @post do |form| %>
 
 <h1>Add a bowl</h1>
 <%= render 'shared/errors', obj: @post %>
@@ -14,12 +64,31 @@
   </p>
 
   <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
+  	<%= form.label :body %><br>
+    <%= form.text_area :body,  maxlength: @maximum_length, id: 'body' %><br>
+    <small>Characters left: <span id="counter" data-maximum-length="<%= @maximum_length %>"><%= @maximum_length %></span></small>
+
   </p>
 
 
   <p>
     <%= form.submit %>
   </p>
+
+  <% end %>
+
+
 <% end %>
+
+<script>
+    $(document).ready(function() {
+      var body = $("#body");
+      var counter     = $("#counter");
+      var max_length  = counter.data("maximum-length");
+      counter.text(max_length - body.val().length);
+      body.keyup(function() {
+          counter.text(max_length - $(this).val().length);
+      });
+
+    });
+</script>
