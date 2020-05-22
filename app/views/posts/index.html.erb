@@ -58,7 +58,9 @@
 			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
 
 		</div>
+
 <% else %>
+
 		<div class="col center-block pt-5" align="center">
 
 			<h2 id="greeting">Pick A Bowl</h2>
@@ -68,41 +70,49 @@
 
 <% end %>
 
-		<div class="container pt-5">
+		<div class="container">
 
-			
-
-			<%# <div class="container"> %>
-
-				<div class="row justify-content-md-center">
+				<%# < Card deck > %>
+				<div class="card-deck row justify-content-md-center">
 
 
 
 				<% @posts.each do |post| %>
 
-					<div class="col-md-3 d-flex align-items-stretch">
+					<div class="col-xs-12 col-sm-6 col-md-4 d-flex align-items-stretch pt-5">
 
-						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
+						<%# < Card > %>
+						<div class="card border-success align-items-center mb-3 d-flex flex-column " style="width: 18rem;">
 
+    					<!--Card image-->
+    					<div>
 
-							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
+								<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
 
-							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
+							</div>
 
-							<p class="card-text text-center"><%= post.body %></p>
+							<!--Card content-->
+							<div class="card-body text-center d-flex flex-column align-items-center">
 
-							<p class="text-center">by <%= link_to post.user.username , profile_path(post.user.id) %></p>
+								<!--Title-->
+								<h5 class="card-title pt-3"><%= post.title %></h5>
 
-							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
+								<!--Text-->
+								<p class="card-text"><%= post.body %></p>
 
-							<%# <div class="position-absolute bm-0"> %>
+								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
+								
+								<br>
+								
+								<%# < View button, stretched link makes whole div clickable > %>
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-light rounded-pill btn-sm mt-auto stretched-link' %>
+								
 
-								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-							<p>  </p>
-
-							<%# </div> %>
+							</div>
 
 						</div>
+
+
 
 					</div>
 
@@ -110,8 +120,15 @@
 
 				</div>
 
-			<%# </div> %>
+
 
 			
 
 			</div>
+
+			<div class="row justify-content-md-center pt-5">
+
+        <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+
+      </div>
+
