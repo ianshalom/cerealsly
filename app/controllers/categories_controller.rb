@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   def show
     @user = current_user
     @category = Category.find(params[:id])
-    @category_posts = @category.posts
+    @category_posts = @category.posts.order("posts.created_at DESC").paginate(page: params[:page], per_page: 6)
   end
 
 end

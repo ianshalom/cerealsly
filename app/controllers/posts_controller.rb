@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all.order(:created_at).reverse
+    @posts = Post.order("posts.created_at DESC").paginate(page: params[:page], per_page: 6)
     @comments = Comment.all
     @users = User.all
     @user = current_user
