@@ -18,6 +18,18 @@
 			      <li class="nav-item">
 			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
 			      </li>
+			        <li class="nav-item dropdown">
+									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    All Categories
+									  </a>
+
+									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
+								    			<% Category.all.each do |category| %>
+													<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+								    		<% end %>
+									  </ul>
+							</li>
 			      <li class="nav-item">
 			        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
 			      </li>
@@ -75,6 +87,10 @@
 			<p>
 	  		<%= @post.body %>
 			</p>
+
+			<% if @post.categories.any? %>
+				<p>Categories: <%= render @post.categories %></p>
+			<% end %>
 	</div>
 	<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
 		<% if user_signed_in? %>
@@ -124,92 +140,3 @@
 </div>
 <% end %>
 </div>
-
-
-
-
-
-
-
-<!-- <p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-<p>
-  <strong>User:</strong>
-  <%= @post.user.username %>
-</p>
-
-<%= image_tag (@post.img_url), style: 'width: 200px; height: 170px' %>
-
-<p>
-  <%= @post.body %>
-</p>
-
-<% if current_user == @post.user %>
-
-		<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-dark' %>
-		<%= link_to 'Delete', post_path(@post), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
-<% end %>
-
-
-<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
-
-	<% if user_signed_in? %>
-
-<% if @comment %>
-			<%= render 'shared/errors', obj: @comment %>
-<% end %>
-
-
-		<div class="form-group">
-
-		   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
-		    	<%= form.text_area :content, rows: 4, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
-		     	<%= form.hidden_field :post_id, value: @post.id %>
-		  </div>
-		 <div class="form-group">
-					  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
-					  </div>
-		</form>
-
-	<div class="comment-header">
-	<h2 >Comments</h2></div>
-        <% @comments.each do |comment| %>
-				<div class="list-group">
-				  <div href="#" class="list-group-item list-group-item-action">
-				    <div class="d-flex w-100 justify-content-between">
-				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-				    </div>
-				    <p class="mb-1"><%= comment.content %></p>
-                    <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-				  </div>
-				  <div>
-				  <% if current_user == comment.user %>
-				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark' %>
-                  <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
-				  <% end %>
-				  </div>
-				</div>
-<% end %>
-
-
-<% else %>
-
-  <div class="comment-header">
-	<h2 >Comments</h2></div>
-		<% @comments.each do |comment| %>
-                <div class="list-group">
-				  <div href="#" class="list-group-item list-group-item-action">
-				    <div class="d-flex w-100 justify-content-between">
-				      <small class="mb-2">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-				    </div>
-					<p class="mb-1"><%= comment.content %></p>
-                    <small>by <%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-                  </div>
-
-</div>
-<% end %>
-
-<% end %>
-<% end %> -->

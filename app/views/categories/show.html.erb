@@ -26,7 +26,7 @@
 									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
 								    			<% Category.all.each do |category| %>
-													<li><%= link_to "#{category.name}",category_path(category), class: 'nav-link' %></li>
+													<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
 								    		<% end %>
 									  </ul>
 							</li>
@@ -61,66 +61,48 @@
 			</nav>
 			<% end %>
 
-		<div class="col center-block pt-5" align="center">
+<div class="container text-center mt-5">
+<h1 class="text-center mt-4"><%= " Category: " + @category.name %></h1>
 
-			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
+	<div class="container">
 
-		</div>
-
-	<div>
-	<%if current_user == @user%>
-	<div class="row justify-content-md-center pt-5">
-	<%= link_to 'Update Your Info', edit_user_registration_path(current_user), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-	</div>
-	<% end %>
-	</div>
+				<%# < Card deck > %>
+				<div class="card-deck row justify-content-md-center">
 
 
 
+				<% @category_posts.each do |post| %>
 
+					<div class="col-xs-12 col-sm-6 col-md-4 d-flex align-items-stretch pt-5">
 
-		<div class="container pt-5">
+						<%# < Card > %>
+						<div class="card border-success align-items-center mb-3 d-flex flex-column " style="width: 18rem;">
 
-			<%# <div class="container"> %>
+    					<!--Card image-->
+    					<div>
 
-				<div class="row justify-content-md-center">
+								<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3 img-fluid' %>
 
+							</div>
 
+							<!--Card content-->
+							<div class="card-body text-center d-flex flex-column align-items-center">
 
-				<% @posts.each do |post| %>
+								<!--Title-->
+								<h5 class="card-title pt-3"><%= post.title %></h5>
 
-					<div class="col-md-3 d-flex align-items-stretch">
+								<!--Text-->
+								<p class="card-text"><%= post.body %></p>
 
-						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
-
-
-							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3' %>
-
-							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
-
-							<p class="card-text text-center"><%= post.body %></p>
-
-							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
-
-							<%# <div class="position-absolute bm-0"> %>
-
-								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-							<p>  </p>
-
-							<%# </div> %>
-
+								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
+								<br>
+								<%# < View button, stretched link makes whole div clickable > %>
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-light rounded-pill btn-sm mt-auto stretched-link' %>
+							</div>
 						</div>
-
 					</div>
-
-				<% end %>
-
-				</div>
-
-			<%# </div> %>
-
-		</div>
-
-		<div class="row justify-content-md-center pt-5">
-		<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-		</div>
+					<% end %>
+      </div>
+					<div class="row justify-content-md-center pt-5">
+        			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+        	</div>
