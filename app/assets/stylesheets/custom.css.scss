@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "pagination";
 
 html {
   position: relative;
@@ -52,7 +53,7 @@ footer {
 	transition: all 0.2s ease-out;
 	box-shadow: 0px 12px 24px rgba(38, 38, 38, 0.5);
 	top: -4px;
-	
+
 	background-color: #28a745 !important;
 }
 //   box-shadow: 8px 12px 31px -10px #5cb85c;

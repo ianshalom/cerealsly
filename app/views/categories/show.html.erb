@@ -64,6 +64,9 @@
 <div class="container text-center mt-5">
 <h1 class="text-center mt-4"><%= " Category: " + @category.name %></h1>
 
+<div class="flickr_pagination mt-4">
+		    <%= will_paginate @category_posts, :container => false %>
+  </div>
 	<div class="container">
 
 				<%# < Card deck > %>
@@ -103,6 +106,11 @@
 					</div>
 					<% end %>
       </div>
+
+
+        	<div class="flickr_pagination mt-4">
+		  			  <%= will_paginate @category_posts, :container => false %>
+ 					 </div>
 					<div class="row justify-content-md-center pt-5">
         			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
         	</div>

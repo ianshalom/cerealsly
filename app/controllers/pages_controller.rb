@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = Post.where(user_id: @user.id).order(:created_at).reverse
+    @posts = Post.where(user_id: @user.id).order("posts.created_at DESC").paginate(page: params[:page], per_page: 6)
 
   end
 
