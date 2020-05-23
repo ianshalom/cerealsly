@@ -126,12 +126,12 @@
 		  	<%= form.label :body %><br>
 		    <%= form.text_area :body,  maxlength: @maximum_length, id: 'body' %><br>
 		    <small>Characters left: <span id="counter" data-maximum-length="<%= @maximum_length %>"><%= @maximum_length %></span></small>
-
-
 		  </p>
+
 						<%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
 						<% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
 						<% end %>
+
 		  <p>
 		  	<%= form.submit "Create Bowl", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 		  </p>
