@@ -19,6 +19,18 @@
 			      <li class="nav-item">
 			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
 			      </li>
+			        <li class="nav-item dropdown">
+									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    All Categories
+									  </a>
+
+									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
+								    			<% Category.all.each do |category| %>
+													<li><%= link_to "#{category.name}",category_path(category), class: 'nav-link' %></li>
+								    		<% end %>
+									  </ul>
+							</li>
 			      <li class="nav-item">
 			        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
 			      </li>
@@ -51,6 +63,51 @@
 
 			<% end %>
 
+<div class="col-4">
+    <ul class="list-group list-group-flush">
+			  <li href="#" class="list-group-item list-group-item-action">
+			    <div class="d-flex w-100 justify-content-between">
+			      <p class="mb-1">Bran Cereal</p>
+			    </div>
+			    <p class="mb-1">Contains high quantities of fiber. Helps digestion and eliminates a consumer’s need for food for a longer period of time.</p>
+			    <small class="text-muted">Kellogg’s All-Bran Cereal</small>
+  		</li>
+  		<li href="#" class="list-group-item list-group-item-action">
+			    <div class="d-flex w-100 justify-content-between">
+			      <p class="mb-1">Hot Cereal</p>
+			    </div>
+			    <p class="mb-1">Hot. Can be wholesome, unsweetened, sugary and processed.</p>
+			    <small class="text-muted">E.g. Quaker Protein</small>
+  		</li>
+  		 <li href="#" class="list-group-item list-group-item-action">
+			    <div class="d-flex w-100 justify-content-between">
+			      <p class="mb-1">Whole-Grain Cereal</p>
+			    </div>
+			    <p class="mb-1">Healthier. Contains high levels of vitamins, minerals and other nutrients beneficial to the human body. Helps reduce cholesterol and sugar levels.
+</p>
+			    <small class="text-muted">E.g. Cheerios Whole Grain Oats</small>
+  		</li>
+  		 <li href="#" class="list-group-item list-group-item-action">
+			    <div class="d-flex w-100 justify-content-between">
+			      <p class="mb-1">Sugary Cereal</p>
+			    </div>
+			    <p class="mb-1">Sweet and savoury. Popular amongst younger consumers.</p>
+			    <small class="text-muted">E.g. Cap’n Crunch Crunch’s Crunch Berries</small>
+  		</li>
+
+  		 <li href="#" class="list-group-item list-group-item-action">
+					    <div class="d-flex w-100 justify-content-between">
+					      <p class="mb-1">Organic Cereal</p>
+					    </div>
+					    <p class="mb-1">Cereals devoid of artificial fertilizers or modified ingredients. Uses honey instead of artificial sweeteners.</p>
+					    <small class="text-muted">E.g. Kaia Cocoa Bliss</small>
+		  		</li>
+				</ul>
+			</div>
+</div>
+
+
+
 <div class="col center-block pt-5" align="center">
 <%= form_with scope: :post, model: @post, local: true do |form| %>
 <div class="container">
@@ -70,6 +127,10 @@
     <%= form.label :body %><br>
     <%= form.text_area :body %>
   </p>
+
+	<%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+				<% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
+				<% end %>
 
 
   <p>

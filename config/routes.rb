@@ -24,4 +24,10 @@ Rails.application.routes.draw do
   patch '/comments/:id' => 'comments#update'
   delete '/comments/:id' => 'comments#destroy'
 
+
+  get '/categories' => 'categories#index', as: 'categories'
+  get '/categories/:id' => 'categories#show', as: 'category'
+
+
+
 end
