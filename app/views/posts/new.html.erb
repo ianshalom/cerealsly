@@ -1,149 +1,309 @@
+<%# Navbar %>
 <% if user_signed_in? %>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
 			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
 			    <span class="navbar-toggler-icon"></span>
+
 			  </button>
+
 			  <div class="collapse navbar-collapse" id="navbarNav">
+
 			    <ul class="navbar-nav">
+
 			    	<li class="nav-item">
-			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
-			      </li>
-			        <li class="nav-item dropdown">
-									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    All Categories
-									  </a>
 
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
-								    			<% Category.all.each do |category| %>
-													<li><%= link_to "#{category.name}",category_path(category), class: 'nav-link' %></li>
-								    		<% end %>
-									  </ul>
-							</li>
-			      <li class="nav-item">
-			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
 			      </li>
 
-			    </ul>
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+						</ul>
+
+			      <ul class="navbar-nav ml-auto">
+
+						<li class="nav-item">
+
+			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+
+						</li>
+
+						<li class="nav-item">
+
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
+						<li class="nav-item">
+
+			      </ul>
+
+
 			  </div>
+
 			</nav>
 
-			<% else %>
+<% else %>
 
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
 			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
 			    <span class="navbar-toggler-icon"></span>
+
 			  </button>
+
 			  <div class="collapse navbar-collapse" id="navbarNav">
+
 			    <ul class="navbar-nav">
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
+
+			    	<li class="nav-item">
+
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
 			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
-			      </li>
-			       <li class="nav-item">
-			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
-			      </li>
+
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+					</ul>
+
+			    <ul class="navbar-nav ml-auto">
+
+			        <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
 			    </ul>
+
 			  </div>
+
 			</nav>
-			<% end %>
+
+<% end %>
 
 
 
-<div class="col-4">
-    <ul class="list-group list-group-flush">
-			  <li href="#" class="list-group-item list-group-item-action">
-			    <div class="d-flex w-100 justify-content-between">
-			      <p class="mb-1">Bran Cereal</p>
-			    </div>
-			    <p class="mb-1">Contains high quantities of fiber. Helps digestion and eliminates a consumer’s need for food for a longer period of time.</p>
-			    <small class="text-muted">Kellogg’s All-Bran Cereal</small>
-  		</li>
-  		<li href="#" class="list-group-item list-group-item-action">
-			    <div class="d-flex w-100 justify-content-between">
-			      <p class="mb-1">Hot Cereal</p>
-			    </div>
-			    <p class="mb-1">Hot. Can be wholesome, unsweetened, sugary and processed.</p>
-			    <small class="text-muted">E.g. Quaker Protein</small>
-  		</li>
-  		 <li href="#" class="list-group-item list-group-item-action">
-			    <div class="d-flex w-100 justify-content-between">
-			      <p class="mb-1">Whole-Grain Cereal</p>
-			    </div>
-			    <p class="mb-1">Healthier. Contains high levels of vitamins, minerals and other nutrients beneficial to the human body. Helps reduce cholesterol and sugar levels.
-</p>
-			    <small class="text-muted">E.g. Cheerios Whole Grain Oats</small>
-  		</li>
-  		 <li href="#" class="list-group-item list-group-item-action">
-			    <div class="d-flex w-100 justify-content-between">
-			      <p class="mb-1">Sugary Cereal</p>
-			    </div>
-			    <p class="mb-1">Sweet and savoury. Popular amongst younger consumers.</p>
-			    <small class="text-muted">E.g. Cap’n Crunch Crunch’s Crunch Berries</small>
-  		</li>
+<h1 class="text-center pt-5">Add a box</h1>
 
-  		 <li href="#" class="list-group-item list-group-item-action">
-					    <div class="d-flex w-100 justify-content-between">
-					      <p class="mb-1">Organic Cereal</p>
-					    </div>
-					    <p class="mb-1">Cereals devoid of artificial fertilizers or modified ingredients. Uses honey instead of artificial sweeteners.</p>
-					    <small class="text-muted">E.g. Kaia Cocoa Bliss</small>
-		  		</li>
-				</ul>
+<%# Shelf List %>
+
+<h2 class="text-center  pt-3">Know your types</h2>
+
+<div class="container">
+
+	<%# < Card deck > %>
+	<div class="row justify-content-md-center">
+
+
+			<div class="col d-flex align-items-stretch ">
+
+				<%# < Card > %>
+				<div class="border border-success align-items-center mb-3 d-flex flex-column mx-1 rounded bg-white" style="width: 18rem;">
+
+					<!--Card content-->
+					<div class="card-body text-center d-flex flex-column align-items-center">
+
+						<!--Title-->
+						<h5 class="card-title pt-1">Bran Cereal</h5>
+
+						<!--Text-->
+						<small class="card-text">Contains high quantities of fiber. Helps digestion and eliminates a consumer’s need for food for a longer period of time.</small>
+
+						<small class="text-muted mt-auto">E.g Kellogg’s All-Bran Cereal</small>
+
+					</div>
+
+				</div>
+
+				<%# < Card > %>
+				<div class=" border border-success align-items-center mb-3 d-flex flex-column mx-1 rounded bg-white" style="width: 18rem;">
+
+					<!--Card content-->
+					<div class="card-body text-center d-flex flex-column align-items-center">
+
+						<!--Title-->
+						<h5 class="card-title pt-1">Hot Cereal</h5>
+
+						<!--Text-->
+						<small class="card-text">Hot. Can be wholesome, unsweetened, sugary and processed.</small>
+
+						<small class="text-muted mt-auto">E.g. Quaker Protein</small>
+
+					</div>
+
+				</div>
+
+				<%# < Card > %>
+				<div class="border border-success align-items-center mb-3 d-flex flex-column mx-1 rounded bg-white" style="width: 18rem;">
+
+					<!--Card content-->
+					<div class="card-body text-center d-flex flex-column align-items-center">
+
+						<!--Title-->
+						<h5 class="card-title pt-1">Whole-Grain Cereal</h5>
+
+						<!--Text-->
+						<small class="card-text pb-3">Healthier. Contains high levels of vitamins, minerals and other nutrients beneficial to the human body. Helps reduce cholesterol and sugar levels.</small>
+
+						<small class="text-muted mt-auto">E.g. Cheerios Whole Grain Oats</small>
+
+					</div>
+
+				</div>
+
+				<%# < Card > %>
+				<div class="border border-success align-items-center mb-3 d-flex flex-column mx-1 rounded bg-white" style="width: 18rem;">
+
+					<!--Card content-->
+					<div class="card-body text-center d-flex flex-column align-items-center">
+
+						<!--Title-->
+						<h5 class="card-title pt-1">Sugary Cereal</h5>
+
+						<!--Text-->
+						<small class="card-text">Sweet and savoury. Popular amongst younger consumers.</small>
+
+						<small class="text-muted mt-auto">E.g. Cap’n Crunch Crunch’s Crunch Berries</small>
+
+					</div>
+
+				</div>
+
+				<%# < Card > %>
+				<div class="border border-success align-items-center mb-3 d-flex flex-column mx-1 rounded bg-white" style="width: 18rem;">
+
+					<!--Card content-->
+					<div class="card-body text-center d-flex flex-column align-items-center">
+
+						<!--Title-->
+						<h5 class="card-title pt-1">Organic Cereal</h5>
+
+						<!--Text-->
+						<small class="card-text">Cereals devoid of artificial fertilizers or modified ingredients. Uses honey instead of artificial sweeteners.</small>
+
+						<small class="text-muted mt-auto">E.g. Kaia Cocoa Bliss</small>
+
+					</div>
+
+				</div>
+
 			</div>
-</div>
 
-
-
-<div class="col center-block pt-5" align="center">
-<%= form_with scope: :post, url: posts_path, local: true do |form| %>
-
-  <%= form_for @post do |form| %>
-
-<h1>Add a bowl</h1>
-		<%= render 'shared/errors', obj: @post %>
-		  <p>
-		    <%= form.label :title %><br>
-		    <%= form.text_field :title %>
-		  </p>
-
-		  <p>
-		    <%= form.label :img_url %><br>
-		    <%= form.text_field :img_url %>
-		  </p>
-
-		  <p>
-		  	<%= form.label :body %><br>
-		    <%= form.text_area :body,  maxlength: @maximum_length, id: 'body' %><br>
-		    <small>Characters left: <span id="counter" data-maximum-length="<%= @maximum_length %>"><%= @maximum_length %></span></small>
-
-
-		  </p>
-						<%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
-						<% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
-						<% end %>
-		  <p>
-		  	<%= form.submit "Create Bowl", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-		  </p>
-
-		  <% end %>
-
-		    <div class="row justify-content-md-center pt-5">
-		        <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-			</div>
-		<% end %>
 		</div>
 
+	</div>
+
+
+			
+
+
+
+<h2 class="text-center pt-3">Ad libs it</h2>
+
+<%# Create Box Form %>
+<div class="container w-75 border border-success rounded bg-white" align="center">
+
+	<%= form_with scope: :post, url: posts_path, local: true do |form| %>
+
+  <%= form_for @post do |form| %>
+		
+		<%= render 'shared/errors', obj: @post %>
+		
+		<p>
+		
+		  <h5>There was once a box of cereal </h5> 
+			
+			<h5> named <%= form.text_field :title,  placeholder: " Name ", :class=> "text-center text-success border border-success rounded"%> </h5>
+		
+			<h5>and it looks like <%= form.text_field :img_url,  placeholder: " image url ", :class=> "text-center text-success border border-success rounded"%>, </h5>
+
+			<h5> very pretty right? It was a nice </h5>
+			<%# Category checkboxes %>
+			<h5 class=" pb-0">
+			<%= form.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+				<% cb.label(class: "checkbox-inline input_checkbox pr-3 pb-0") {cb.check_box(class: "checkbox") + cb.text} %>
+				<% end %>
+			</h5>
+	
+			<h5 class="pt-0"> type breakfast. And I would describe it as </h5>
+
+			<h5>
+
+			<div class="row justify-content-md-center pt-3">
+		  
+			<%= form.text_area :body,  maxlength: @maximum_length, id: 'body', :class=> 'border border-success text-success rounded' %><br>
+
+			<div>
+		  </h5>
+			<small>Characters left: <span id="counter" data-maximum-length="<%= @maximum_length %>"><%= @maximum_length %></span></small>
+
+		</p>
+
+		
+
+		<p>
+		
+			<%= form.submit "Add it to the pantry", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+		
+		</p>
+
+	<% end %>
+
+</div>
+
+		<div class="row justify-content-md-center pt-5">
+		  
+			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+		
+		</div>
+	
+	<% end %>
+	
+
+<%# Word count for body %>
 <script>
     $(document).ready(function() {
       var body = $("#body");

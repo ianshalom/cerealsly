@@ -1,142 +1,269 @@
+<%# Navbar %>
 <% if user_signed_in? %>
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
 			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
 			    <span class="navbar-toggler-icon"></span>
+
 			  </button>
+
 			  <div class="collapse navbar-collapse" id="navbarNav">
+
 			    <ul class="navbar-nav">
+
 			    	<li class="nav-item">
-			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'Create', new_post_path, class: 'nav-link' %>
-			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
-			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'My Profile', profile_path(@user.id), class: 'nav-link' %>
-			      </li>
-			        <li class="nav-item dropdown">
-									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    All Categories
-									  </a>
 
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
-								    			<% Category.all.each do |category| %>
-													<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
-								    		<% end %>
-									  </ul>
-							</li>
-			      <li class="nav-item">
-			        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
 			      </li>
 
-			    </ul>
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+						</ul>
+
+			      <ul class="navbar-nav ml-auto">
+
+						<li class="nav-item">
+
+			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+
+						</li>
+
+						<li class="nav-item">
+
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
+						<li class="nav-item">
+
+			      </ul>
+
+
 			  </div>
+
 			</nav>
 
-			<% else %>
+<% else %>
 
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
 			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
 			    <span class="navbar-toggler-icon"></span>
+
 			  </button>
+
 			  <div class="collapse navbar-collapse" id="navbarNav">
+
 			    <ul class="navbar-nav">
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
+
+			    	<li class="nav-item">
+
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
 			      </li>
-			      <li class="nav-item">
-			        <%= link_to 'Sign in', new_user_session_path, class: 'nav-link' %>
-			      </li>
-			       <li class="nav-item">
-			        <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
-			      </li>
+
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+					</ul>
+
+			    <ul class="navbar-nav ml-auto">
+
+			        <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
 			    </ul>
+
 			  </div>
+
 			</nav>
-			<% end %>
 
+<% end %>
+
+<%# image frame %>
 <div class="container text-center mt-5">
-	<div class="row">
-		<div class="col">
-<%= image_tag (@post.img_url), style: 'width: 450px; height: 450px', class: "img-fluid" %><br><br>
 
- <% if current_user %>
-		<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-dark' %>
-		<%= link_to 'Delete', post_path(@post), class: 'btn btn-outline-dark', method: :delete, data:{ confirm: 'Are you sure?' } %>
+	<div class="row">
+
+		<div class="col">
+
+			<%= image_tag (@post.img_url), style: 'width: 450px; height: 450px', class: "img-fluid border border-success rounded bg-white" %><br><br>
+			
+ 		<% if current_user %>
+
+			<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-success rounded-pill btn-sm w-25' %>
+
+			<%= link_to 'Delete', post_path(@post), class: 'btn btn-outline-success rounded-pill btn-sm w-25', method: :delete, data:{ confirm: 'Are you sure?' } %>
+			
 		<% end %>
+
+<%# Back Button %>
+	<div class="row justify-content-md-center pt-5">
+
+  	<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+
+  </div>
 
 	</div>
 
-<div class="col">
-	<div class="text-left">
-			<p>
-			 	<strong><%= @post.title %></strong>
-			</p>
+<%# Description %>
+	<div class="col">
 
+		<div class="text-center">
+				
 			<p>
-			  <small><%= @post.user.username %></small>
-
-			</p>
-
-			<p>
-	  		<%= @post.body %>
+			
+				<h1><%= @post.title %></h1>
+			
 			</p>
 
 			<% if @post.categories.any? %>
+			
 				<p>Categories: <%= render @post.categories %></p>
+			
 			<% end %>
-	</div>
-	<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
-		<% if user_signed_in? %>
-			<% if @comment %>
-						<%= render 'shared/errors', obj: @comment %>
+
+
+
+			<h4>
+			
+				<%= @post.body %>
+			
+			</h4>
+
+			<p>
+
+	
+			
+				<small class="blockquote-footer">  <%= @post.user.username %></small>
+
+
+
+			</p>
+			
+		</div>
+
+
+
+
+
+
+		<%# Comments Form %>
+		<%= form_with scope: :comment, url: comments_path, local: true do |form| %>
+
+			<% if user_signed_in? %>
+
+				<% if @comment %>
+
+							<%= render 'shared/errors', obj: @comment %>
+
+				<% end %>
+
+				<div class="form-group">
+
+								<%= form.label :content, class: 'col-2 col-form-label text-light' %>
+
+								<%= form.text_area :content, rows: 5, class: 'form-control border border-success rounded bg-white', placeholder: 'Make a comment' %>
+
+								<%= form.hidden_field :post_id, value: @post.id %>
+
+					</div>
+
+				<div class="form-group text-center">
+
+								<%= form.submit "Post Comment", class: "btn btn-outline-success rounded-pill btn-sm mb-5" %>
+								</div>
+					</form>
+				<% end %>
 			<% end %>
-			<div class="form-group">
-				   		<%= form.label :content, class: 'col-2 col-form-label text-light' %>
-				    	<%= form.text_area :content, rows: 5, class: 'form-control shadow rounded', placeholder: 'Make a comment' %>
-				     	<%= form.hidden_field :post_id, value: @post.id %>
-			  </div>
-			 <div class="form-group text-left">
-						  <%= form.submit class: "btn btn-outline-dark btn-lg " %>
-						  </div>
-				</form>
-			<% end %>
-		<% end %>
-</div>
-</div>
 
 
-<div class="row justify-content-md-center pt-5">
-        <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-        </div>
 
-
+<%# Comments List %>
 <% @comments.each do |comment| %>
-<div class="list-group mt-3 text-left">
 
-  <div class="list-group-item list-group-item-action">
+	<div class="list-group border border-success rounded bg-white text-left text-dark mt-3">
 
-    <div class="d-flex  justify-content-between">
+  	<div class="list-group-item list-group-item-action">
 
-      <small><%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-      <small class="mb-3">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-    </div>
-    <p class="mb-3 text-left"><%= comment.content %></p>
-    <small></small>
-     <% if current_user == comment.user %>
-	<div class="btn-group" role="group">
-				  <%= link_to 'Edit', edit_comment_path(comment), class: 'btn btn-outline-dark btn-group-small btn-sm comment-btns' %>
-          <%= link_to 'Delete', comment_path(comment), class: 'btn btn-outline-dark btn-group-small btn-sm comment-btns', method: :delete, data:{ confirm: 'Are you sure?' } %>
-        </div>
-				  <% end %>
+    	<div class="d-flex  justify-content-between">
 
-  </div>
-</div>
+      	<small><%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+      
+				<small class="mb-3">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
+    	
+			</div>
+   
+			<p class="mb-3 mt-3 text-left"><%= comment.content %></p>
+			
+			<% if current_user == comment.user %>
+			
+				<div class="btn-group pt-3" role="group">
+
+					<small class="text-center ml-auto">
+					
+					<%= link_to 'Edit', edit_comment_path(comment), class: 'text-success pr-3' %>
+					
+					<%= link_to 'Delete', comment_path(comment), class: ' text-success pr-3', method: :delete, data:{ confirm: 'Are you sure?' } %>
+
+					</small>
+			
+				</div>
+			
+			<% end %>
+
+  	</div>
+
+	</div>
+
 <% end %>
+
 </div>
+
+</div>
+
+
