@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   get '/categories' => 'categories#index', as: 'categories'
   get '/categories/:id' => 'categories#show', as: 'category'
 
-
+  #Nest the likes resource inside the posts resource
+  resources :posts do
+    resources :likes
+  end
 
 end

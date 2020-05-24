@@ -66,7 +66,7 @@
 
 		<div class="col center-block pt-5" align="center">
 
-			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
+			<h2 id="greeting">Welcome <%= @user.username %>!</h2>
 
 		</div>
 
@@ -114,6 +114,9 @@
 
 								<!--Text-->
 								<p class="card-text"><%= post.body %></p>
+
+								<!--Likes-->
+								<small><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
 
 								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
 
