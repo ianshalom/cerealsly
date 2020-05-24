@@ -17,6 +17,7 @@
 
 			    	<li class="nav-item">
 
+
 			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
 
 			      </li>
@@ -251,6 +252,7 @@
   <%= form_for @post do |form| %>
 		
 		<%= render 'shared/errors', obj: @post %>
+
 		
 		<p>
 		
@@ -298,6 +300,7 @@
 		  
 			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 		
+
 		</div>
 	
 	<% end %>

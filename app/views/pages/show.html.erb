@@ -61,6 +61,8 @@
 			</nav>
 			<% end %>
 
+
+
 		<div class="col center-block pt-5" align="center">
 
 			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
@@ -77,9 +79,11 @@
 
 
 
+<div class="flickr_pagination mt-4">
+		    <%= will_paginate @posts, :container => false %>
+  </div>
 
-
-		<div class="container pt-5">
+		<div class="container mt-4">
 
 			<%# <div class="container"> %>
 
@@ -89,7 +93,7 @@
 
 				<% @posts.each do |post| %>
 
-					<div class="col-md-3 d-flex align-items-stretch">
+					<div class="col-md-4 d-flex align-items-stretch">
 
 						<div class="card border-success align-items-center mb-3 d-flex flex-column" style="width: 18rem;">
 
@@ -104,7 +108,7 @@
 
 							<%# <div class="position-absolute bm-0"> %>
 
-								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+								<%= link_to 'View', post_path(post), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto stretched-link' %>
 							<p>  </p>
 
 							<%# </div> %>
@@ -117,9 +121,13 @@
 
 				</div>
 
-			<%# </div> %>
+
 
 		</div>
+
+		<div class="flickr_pagination mt-4">
+		    <%= will_paginate @posts, :container => false %>
+  </div>
 
 		<div class="row justify-content-md-center pt-5">
 		<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>

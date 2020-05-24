@@ -127,7 +127,6 @@
 
 <% if user_signed_in? %>
 
-
 		<div class="col center-block pt-5" align="center">
 
 			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
@@ -145,10 +144,12 @@
 
 <% end %>
 
+
 <%# Index cereal box cards  %>
 <% if user_signed_in? %>
 
 	<div class="row justify-content-md-center pt-3">
+
 
     <%= link_to 'Add a Box', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 
@@ -232,6 +233,7 @@
 							<!--Text-->
 							<p class="card-text"><%= post.body %></p>
 
+
 							<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
 
 							<br>
@@ -252,6 +254,11 @@
 	</div>
 
 	<% end %>
+
+  <div class="flickr_pagination mt-4">
+		    <%= will_paginate @posts, :container => false %>
+  </div>
+		<div class="container">
 
 	<%# Back Button %>
 	<div class="row justify-content-md-center pt-5">
