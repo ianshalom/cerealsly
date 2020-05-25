@@ -162,20 +162,31 @@
 	<div class="row justify-content-md-center pt-3">
 
 
-    <%= link_to 'Add a Box', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
+    <%= link_to 'Add a Box', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto mb-4' %>
 
   </div>
 
-
-<!-- FEATURED POST -->
- <p><%= @post.title %></p>
- <!-- FEATURED POST -->
 
 
 
 
 	<div class="container">
 
+		<!-- FEATURED POST -->
+
+		 <!-- FEATURED POST -->
+
+		<div class="card-deck text-center">
+		  <div class="card">
+		  	<h2 class="mb-4 mt-4">Rated the highest by our users</h2>
+		  <div> <%= image_tag (@post.img_url), style: 'width: 200px; height: 170px; margin: 0 auto;', class: "card border-success align-items-center mb-3 d-flex" %></div>
+		    <div class="card-body">
+		      <h5 class="mb-3"><%= @post.title %></h5>
+		      <p class="mb-3"><%= @post.body %></p>
+		      <small class="card-text mt-auto ">Created <%= time_ago_in_words(@post.created_at) %> ago by <%=(@post.user.username) %></small>
+		    </div>
+		  </div>
+		</div>
 		<%# < Card deck > %>
 		<div class="card-deck row justify-content-md-center">
 
