@@ -26,7 +26,7 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
+
 							</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -93,7 +93,7 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
+
 							</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -183,7 +183,10 @@
 							<!--Text-->
 							<p class="card-text"><%= post.body %></p>
 
-							<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
+								<small><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+
+
+								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
 
 							<br>
 
@@ -210,7 +213,7 @@
 		<%# < Card deck > %>
 		<div class="card-deck row justify-content-md-center">
 
-
+<% @posts.each do |post| %>
 				<div class="col-xs-12 col-sm-6 col-md-4 d-flex align-items-stretch pt-5">
 
 					<%# < Card > %>
