@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get '/pages/:id' => 'pages#show', as: 'profile'
 
+#Nest the likes resource inside the posts resource
+
 
   get '/posts' => 'posts#index', as: 'posts'
   get '/posts/new' => 'posts#new', as: 'new_post'
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   get '/categories' => 'categories#index', as: 'categories'
   get '/categories/:id' => 'categories#show', as: 'category'
 
+  resources :posts do
+    resources :likes
+  end
 
 
 end

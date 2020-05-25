@@ -113,6 +113,9 @@
 
 							<p class="card-text text-center"><%= post.body %></p>
 
+							<<!--Likes-->
+							<small class="text-center"><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small><br>
+
 							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
 
 							<%# <div class="position-absolute bm-0"> %>
