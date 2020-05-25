@@ -43,7 +43,8 @@ class PostsController < ApplicationController
     flash[:notice] = "Post was created successfully."
       redirect_to @post
     else
-      render 'new'
+      flash[:notice] = "Some fields are empty."
+      redirect_back(fallback_location: root_path)
     end
   end
 
