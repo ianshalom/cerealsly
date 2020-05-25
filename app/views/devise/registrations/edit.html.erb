@@ -37,6 +37,12 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
+  <div class="field">
+  <br>
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+  </div>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
@@ -57,6 +63,19 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+
+  <div class="field">
+  <br/>
+    <%= f.label :profile_pic %><br />
+    <%= f.text_field :profile_pic, autofocus: true, autocomplete: "profile_pic" %>
+  </div>
+
+  <div class="field">
+  <br/>
+    <%= f.label :about %><br />
+    <%= f.text_field :about, autofocus: true, autocomplete: "about" %>
+  </div>
+  <br>
 
   <div class="field">
   <br/>
