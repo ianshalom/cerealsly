@@ -21,9 +21,8 @@ class CommentsController < ApplicationController
           flash[:notice] = "Your comment has been successfully added."
             redirect_back(fallback_location: root_path)
         else
-          @post = Post.find(@comment.post.id)
-          @comments = @post.comments
-          render :template => 'posts/show'
+          flash[:notice] = "Your comment cannot be empty."
+            redirect_back(fallback_location: root_path)
       end
   end
 

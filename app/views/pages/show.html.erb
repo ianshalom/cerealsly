@@ -103,13 +103,13 @@
 		<div class="container mt-4">
 
 			<%# <div class="container"> %>
+			<%if @posts.exists? %>
 			<div class="col center-block pt-5" align="center">
 			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
 			</div>
-
+			
 				<div class="row justify-content-md-center">
-
-
+				
 
 				<% @posts.each do |post| %>
 
@@ -124,7 +124,7 @@
 
 							<p class="card-text text-center"><%= post.body %></p>
 
-							<<!--Likes-->
+							<!--Likes-->
 							<small class="text-center"><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small><br>
 
 							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
@@ -141,17 +141,19 @@
 					</div>
 
 				<% end %>
-
+				
 				</div>
-
-
 
 		</div>
 
 		<div class="flickr_pagination mt-4">
 		    <%= will_paginate @posts, :container => false %>
   </div>
-
+  <%else%>
+  <div class="col center-block pt-5" align="center">
+  <h2 id="greeting"><%= @user.username %>'s has no cereals</h2>
+  </div>
+<%end%>
 		<div class="row justify-content-md-center pt-5">
 		<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 		</div>
