@@ -77,9 +77,14 @@
 		<div class="col center-block pt-5" align="center">
 			<h2 id="greeting"><%= @user.username %></h2>
 
+
+	<% if @user.profile_pic != nil %>
 		<div>
 		<%= image_tag (@user.profile_pic), style: 'width: 200px; height: 170px', :class => 'pt-3 rounded-circle' %>
+		<% end %>
 		</div>
+
+
 		<div>
 		<br>
 		<%= @user.about%>
@@ -107,9 +112,9 @@
 			<div class="col center-block pt-5" align="center">
 			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
 			</div>
-			
+
 				<div class="row justify-content-md-center">
-				
+
 
 				<% @posts.each do |post| %>
 
@@ -141,7 +146,7 @@
 					</div>
 
 				<% end %>
-				
+
 				</div>
 
 		</div>
