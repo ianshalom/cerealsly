@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @user = current_user
+    @maximum_length = Post.validators_on( :body ).first.options[:maximum]
   end
 
   def create
