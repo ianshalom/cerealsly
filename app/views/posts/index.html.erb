@@ -26,10 +26,21 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
-							</a>
 
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
+
+									<% Category.all.each do |category| %>
+
+									<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
+
+								  <% end %>
+
+								</div>
+
+<!-- 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
 
@@ -39,7 +50,7 @@
 
 								  <% end %>
 
-								</ul>
+								</ul> -->
 
 						</li>
 
@@ -93,7 +104,7 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
+
 							</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -129,7 +140,7 @@
 
 		<div class="col center-block pt-5" align="center">
 
-			<h2 id="greeting">Good mornin' <%= @user.username %>!</h2>
+			<h2 id="greeting">Welcome <%= @user.username %>!</h2>
 
 		</div>
 
@@ -154,6 +165,14 @@
     <%= link_to 'Add a Box', new_post_path, :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 
   </div>
+
+
+<!-- FEATURED POST -->
+ <p><%= @post.title %></p>
+ <!-- FEATURED POST -->
+
+
+
 
 	<div class="container">
 
@@ -183,7 +202,10 @@
 							<!--Text-->
 							<p class="card-text"><%= post.body %></p>
 
-							<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
+								<small><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+
+
+								<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
 
 							<br>
 
@@ -210,8 +232,7 @@
 		<%# < Card deck > %>
 		<div class="card-deck row justify-content-md-center">
 
-			<% @posts.each do |post| %>
-
+<% @posts.each do |post| %>
 				<div class="col-xs-12 col-sm-6 col-md-4 d-flex align-items-stretch pt-5">
 
 					<%# < Card > %>

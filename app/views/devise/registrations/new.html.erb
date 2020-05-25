@@ -31,7 +31,6 @@
     <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
   </div>
 
-
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -44,7 +43,17 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-  <br />
+
+  <div class="field align-center" >
+    <%= f.label :profile_pic %><br />
+   	<%= f.file_field :profile_pic,:class => 'align-center'%>
+  </div>
+
+  <div class="field">
+    <%= f.label :about %><br />
+    <%= f.text_field :about, autofocus: true, autocomplete: "about" %>
+  </div>
+  <br>
 
   <div class="actions">
     <%= f.submit "Sign up", :class => 'btn btn-success rounded-pill btn-lg' %>

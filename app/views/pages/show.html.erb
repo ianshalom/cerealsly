@@ -20,15 +20,26 @@
 			      </li>
 			        <li class="nav-item dropdown">
 									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    All Categories
+									    Shelves
 									  </a>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
+
+											<% Category.all.each do |category| %>
+
+											<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
+
+										  <% end %>
+
+										</div>
+
+<!-- 									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
 								    			<% Category.all.each do |category| %>
 													<li><%= link_to "#{category.name}",category_path(category), class: 'nav-link' %></li>
 								    		<% end %>
-									  </ul>
+									  </ul> -->
 							</li>
 			      <li class="nav-item">
 			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>
@@ -64,9 +75,15 @@
 
 
 		<div class="col center-block pt-5" align="center">
+			<h2 id="greeting"><%= @user.username %></h2>
 
-			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
-
+		<div>
+		<%= image_tag (@user.profile_pic), style: 'width: 200px; height: 170px', :class => 'pt-3 rounded-circle' %>
+		</div>
+		<div>
+		<br>
+		<%= @user.about%>
+		</div>
 		</div>
 
 	<div>
@@ -86,10 +103,13 @@
 		<div class="container mt-4">
 
 			<%# <div class="container"> %>
-
+			<%if @posts.exists? %>
+			<div class="col center-block pt-5" align="center">
+			<h2 id="greeting"><%= @user.username %>'s Bowls</h2>
+			</div>
+			
 				<div class="row justify-content-md-center">
-
-
+				
 
 				<% @posts.each do |post| %>
 
@@ -103,6 +123,9 @@
 							<h5 class="card-title text-dark text-center pt-3"><%= post.title %></h5>
 
 							<p class="card-text text-center"><%= post.body %></p>
+
+							<!--Likes-->
+							<small class="text-center"><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small><br>
 
 							<small class="text-center">Created <%= time_ago_in_words(post.created_at) %> ago</small><br>
 
@@ -118,17 +141,19 @@
 					</div>
 
 				<% end %>
-
+				
 				</div>
-
-
 
 		</div>
 
 		<div class="flickr_pagination mt-4">
 		    <%= will_paginate @posts, :container => false %>
   </div>
-
+  <%else%>
+  <div class="col center-block pt-5" align="center">
+  <h2 id="greeting"><%= @user.username %>'s has no cereals</h2>
+  </div>
+<%end%>
 		<div class="row justify-content-md-center pt-5">
 		<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 		</div>

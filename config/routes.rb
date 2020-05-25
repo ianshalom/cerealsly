@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
   root 'pages#home'
 
   get '/pages/:id' => 'pages#show', as: 'profile'
+
+#Nest the likes resource inside the posts resource
 
 
   get '/posts' => 'posts#index', as: 'posts'
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
   get '/categories' => 'categories#index', as: 'categories'
   get '/categories/:id' => 'categories#show', as: 'category'
 
+  resources :posts do
+    resources :likes
+  end
 
 
 end
