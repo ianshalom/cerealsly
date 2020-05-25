@@ -26,10 +26,21 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
-							</a>
 
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
+
+									<% Category.all.each do |category| %>
+
+									<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
+
+								  <% end %>
+
+								</div>
+
+<!-- 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
 
@@ -39,7 +50,7 @@
 
 								  <% end %>
 
-								</ul>
+								</ul> -->
 
 						</li>
 
@@ -93,7 +104,7 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
+
 							</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -244,15 +255,15 @@
 	<%= form_with scope: :post, url: posts_path, local: true do |form| %>
 
   <%= form_for @post do |form| %>
-		
+
 		<%= render 'shared/errors', obj: @post %>
-		
+
 		<p>
-		
-		  <h5>There was once a box of cereal </h5> 
-			
+
+		  <h5>There was once a box of cereal </h5>
+
 			<h5> named <%= form.text_field :title,  placeholder: " Name ", :class=> "text-center text-success border border-success rounded"%> </h5>
-		
+
 			<h5>and it looks like <%= form.text_field :img_url,  placeholder: " image url ", :class=> "text-center text-success border border-success rounded"%>, </h5>
 
 			<h5> very pretty right? It was a nice </h5>
@@ -262,13 +273,13 @@
 				<% cb.label(class: "checkbox-inline input_checkbox pr-3 pb-0") {cb.check_box(class: "checkbox") + cb.text} %>
 				<% end %>
 			</h5>
-	
+
 			<h5 class="pt-0"> type breakfast. And I would describe it as </h5>
 
 			<h5>
 
 			<div class="row justify-content-md-center pt-3">
-		  
+
 			<%= form.text_area :body,  maxlength: @maximum_length, id: 'body', :class=> 'border border-success text-success rounded' %><br>
 
 			<div>
@@ -277,12 +288,12 @@
 
 		</p>
 
-		
+
 
 		<p>
-		
+
 			<%= form.submit "Add it to the pantry", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-		
+
 		</p>
 
 	<% end %>
@@ -290,13 +301,13 @@
 </div>
 
 		<div class="row justify-content-md-center pt-5">
-		  
+
 			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
-		
+
 		</div>
-	
+
 	<% end %>
-	
+
 
 <%# Word count for body %>
 <script>

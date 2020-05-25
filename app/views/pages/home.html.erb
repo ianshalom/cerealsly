@@ -18,15 +18,25 @@
 			      </li>
 			       <li class="nav-item dropdown">
 									  <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									    All Categories
+									    Shelves
 									  </a>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+											<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
+
+											<% Category.all.each do |category| %>
+
+											<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
+
+										  <% end %>
+
+										</div>
+<!-- 									  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 													<li><%= link_to 'All Categories', categories_path, class: 'nav-link' %></li>
 								    			<% Category.all.each do |category| %>
 													<li><%= link_to "#{category.name}",category_path(category), class: 'nav-link' %></li>
 								    		<% end %>
-									  </ul>
+									  </ul> -->
 							</li>
 			      <li class="nav-item">
 			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'nav-link' %>

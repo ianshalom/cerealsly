@@ -26,10 +26,21 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
-							</a>
 
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							</a>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
+
+									<% Category.all.each do |category| %>
+
+									<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
+
+								  <% end %>
+
+								</div>
+
+<!-- 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
 
@@ -39,7 +50,7 @@
 
 								  <% end %>
 
-								</ul>
+								</ul> -->
 
 						</li>
 
@@ -93,7 +104,7 @@
 							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
 								 Shelves
-								
+
 							</a>
 
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -132,13 +143,13 @@
 		<div class="col">
 
 			<%= image_tag (@post.img_url), style: 'width: 450px; height: 450px', class: "img-fluid border border-success rounded bg-white" %><br><br>
-			
+
  		<% if current_user %>
 
 			<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-success rounded-pill btn-sm w-25' %>
 
 			<%= link_to 'Delete', post_path(@post), class: 'btn btn-outline-success rounded-pill btn-sm w-25', method: :delete, data:{ confirm: 'Are you sure?' } %>
-			
+
 		<% end %>
 
 <%# Back Button %>
@@ -154,37 +165,37 @@
 	<div class="col">
 
 		<div class="text-center">
-				
+
 			<p>
-			
+
 				<h1><%= @post.title %></h1>
-			
+
 			</p>
 
 			<% if @post.categories.any? %>
-			
+
 				<p>Categories: <%= render @post.categories %></p>
-			
+
 			<% end %>
 
 
 
 			<h4>
-			
+
 				<%= @post.body %>
-			
+
 			</h4>
 
 			<p>
 
-	
-			
+
+
 				<small class="blockquote-footer">  <%= @post.user.username %></small>
 
 
 
 			</p>
-			
+
 		</div>
 
 
@@ -233,27 +244,27 @@
     	<div class="d-flex  justify-content-between">
 
       	<small><%= link_to comment.user.username, profile_path(comment.user.id) %></small>
-      
+
 				<small class="mb-3">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
-    	
+
 			</div>
-   
+
 			<p class="mb-3 mt-3 text-left"><%= comment.content %></p>
-			
+
 			<% if current_user == comment.user %>
-			
+
 				<div class="btn-group pt-3" role="group">
 
 					<small class="text-center ml-auto">
-					
+
 					<%= link_to 'Edit', edit_comment_path(comment), class: 'text-success pr-3' %>
-					
+
 					<%= link_to 'Delete', comment_path(comment), class: ' text-success pr-3', method: :delete, data:{ confirm: 'Are you sure?' } %>
 
 					</small>
-			
+
 				</div>
-			
+
 			<% end %>
 
   	</div>
@@ -265,5 +276,3 @@
 </div>
 
 </div>
-
-
