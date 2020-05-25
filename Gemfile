@@ -5,6 +5,10 @@ ruby '2.5.1'
 
 gem 'devise'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'cloudinary'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use postgresql as the database for Active Record
