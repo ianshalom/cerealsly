@@ -60,7 +60,7 @@
 
 						<li class="nav-item">
 
-			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+			        <%= link_to @user.username.capitalize, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
 
 						</li>
 
@@ -181,3 +181,11 @@
 
 					</div>
 					<% end %>
+
+					<br>
+		</div>
+
+
+			<div class="row justify-content-md-center pt-5 pb-5">
+				<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto mb-5' %>
+			</div>

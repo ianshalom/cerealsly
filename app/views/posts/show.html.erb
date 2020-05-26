@@ -48,7 +48,7 @@
 
 						<li class="nav-item">
 
-			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+			        <%= link_to @user.username.capitalize, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
 
 						</li>
 
@@ -189,7 +189,7 @@
 
 
 
-				<small class="blockquote-footer">  <%= link_to @post.user.username, profile_path(@post.user) %></small>
+				<small class="blockquote-footer">  <%= link_to @post.user.username.capitalize, profile_path(@post.user) %></small>
 
 
 
@@ -236,13 +236,13 @@
 <%# Comments List %>
 <% @comments.each do |comment| %>
 
-	<div class="list-group border border-success rounded bg-white text-left text-dark mt-3">
+	<div class="list-group border border-success rounded bg-white text-left text-dark mt-3 mb-4">
 
   	<div class="list-group-item list-group-item-action">
 
     	<div class="d-flex  justify-content-between">
 
-      	<small><%= link_to comment.user.username, profile_path(comment.user.id) %></small>
+      	<small><%= link_to comment.user.username.capitalize, profile_path(comment.user.id) %></small>
 
 				<small class="mb-3">Posted <%= time_ago_in_words(comment.created_at) %> ago</small>
 
