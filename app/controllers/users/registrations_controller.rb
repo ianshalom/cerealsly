@@ -12,14 +12,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    if params[:user][:profile_pic]
     uploaded_file = params[:user][:profile_pic].path
     puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     puts uploaded_file
     cloudnary_file = Cloudinary::Uploader.upload(uploaded_file)
     @user.profile_pic = cloudnary_file["url"]
-
     @user.save
-
+    end
   end
 
   # GET /resource/edit
@@ -30,13 +30,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
+    if params[:user][:profile_pic]
     uploaded_file = params[:user][:profile_pic].path
     puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
     puts uploaded_file
     cloudnary_file = Cloudinary::Uploader.upload(uploaded_file)
     @user.profile_pic = cloudnary_file["url"]
-
     @user.save
+    end
   end
 
   # DELETE /resource
