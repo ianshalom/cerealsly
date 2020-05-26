@@ -1,66 +1,228 @@
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<%# Navbar %>
+<% if user_signed_in? %>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
 			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
 			    <span class="navbar-toggler-icon"></span>
+
 			  </button>
+
 			  <div class="collapse navbar-collapse" id="navbarNav">
+
 			    <ul class="navbar-nav">
+
 			    	<li class="nav-item">
-			        <%= link_to 'Home', posts_path, class: 'nav-link' %>
+
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
+
 			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="#">About</a>
-			      </li>
-			    </ul>
+
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+						</ul>
+
+			      <ul class="navbar-nav ml-auto">
+
+						<li class="nav-item">
+
+			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+
+						</li>
+
+						<li class="nav-item">
+
+			        <%= link_to 'Log Out', destroy_user_session_path(@post), method: :delete, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
+						<li class="nav-item">
+
+			      </ul>
+
+
 			  </div>
+
 			</nav>
 
+<% else %>
+
+			<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom border-success">
+
+			   <%= link_to 'cerealsly', root_path, class: 'navbar-brand text-success' %>
+
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+			    <span class="navbar-toggler-icon"></span>
+
+			  </button>
+
+			  <div class="collapse navbar-collapse" id="navbarNav">
+
+			    <ul class="navbar-nav">
+
+			    	<li class="nav-item">
+
+			        <%= link_to 'The Pantry', posts_path, class: 'nav-link' %>
+
+			      </li>
+
+			    	<li class="nav-item dropdown">
+
+							<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+								 Shelves
+								
+							</a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
+
+									<% Category.all.each do |category| %>
+
+									<li><%= link_to "#{category.name}", category_path(category), class: 'nav-link' %></li>
+
+								  <% end %>
+
+								</ul>
+
+						</li>
+
+					</ul>
+
+			    <ul class="navbar-nav ml-auto">
+
+			        <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success btn-sm rounded-pill pl-4 pr-4 pt-2 pb-2' %>
+
+			    </ul>
+
+			  </div>
+
+			</nav>
+
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="col center-block pt-5" align="center">
 
-  <h2>Sign up</h2>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <h1>Sign up</h1>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
-  </div>
+    <div class="container w-50 border border-success rounded bg-white" align="center">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>( min <%=  @minimum_password_length %> characters )</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="field pt-5 pb-3">
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+        <h5>
 
-  <div class="field align-center" >
-    <%= f.label :profile_pic %><br />
-   	<%= f.file_field :profile_pic,:class => 'align-center'%>
-  </div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: " email ", :class=> "text-center text-success border border-success rounded" %>
 
-  <div class="field">
-    <%= f.label :about %><br />
-    <%= f.text_field :about, autofocus: true, autocomplete: "about" %>
-  </div>
-  <br>
+        </h5>
 
-  <div class="actions">
-    <%= f.submit "Sign up", :class => 'btn btn-success rounded-pill btn-lg' %>
-  </div>
-</div>
-<% end %>
+      </div>
 
-  <div class="col center-block" align="center">
-    <%= render "devise/shared/links" %>
-  </div>
+      <div class="field pb-3">
+
+        <h5>
+
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: " username ", :class=> "text-center text-success border border-success rounded" %>
+
+        </h5>
+
+      </div>
+
+      <div class="field">
+
+        <% if @minimum_password_length %>
+
+        <h5>
+
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: " password ", :class=> "text-center text-success border border-success rounded" %>
+
+        </h5>
+
+        <div class="pt-0 mb-0">
+
+        <em>( min <%=  @minimum_password_length %> characters )</em>
+
+        </div>
+
+        <br>
+
+        <% end %>
+
+      </div>
+
+      <div class="field">
+      
+
+        <h5>
+
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "confirm password", :class=> "text-center text-success border border-success rounded" %>
+
+        </h5>
+
+
+      </div>
+
+      <div class=" pb-4" >
+
+        <%= f.label :profile_pic, :class => "pb-0" %><br />
+
+        <%= f.file_field :profile_pic, placeholder: "profile pic",:class=> "text-center text-success border border-success rounded btn-outline success" %>
+
+      </div>
+
+      <div class="field">
+        
+        <h5>
+
+        <%= f.text_area :about, autofocus: true, autocomplete: "about", placeholder: "about", :class=> "text-center text-success border border-success rounded btn-outline success" %>
+
+        </h5>
+
+      </div>
+
+      <br>
+
+      <div class="actions">
+
+        <%= f.submit "Sign up", :class => 'btn btn-success rounded-pill btn-lg' %>
+
+      </div>
+
+      <div class="col center-block pb-5" align="center">
+
+        <%= render "devise/shared/links" %>
+
+      </div>
+
+    </div>
+
+    </div>
+
+    <% end %>   
