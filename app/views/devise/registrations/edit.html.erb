@@ -30,17 +30,24 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="col center-block pt-5" align="center">
+  <div class="col center-block pt-3 pb-3" align="center">
   <h2>Update <%= resource_name.to_s.humanize %></h2>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="container w-50 border border-success rounded bg-white pb-3" align="center">
+
+  <div class="field pt-5 pb-3">
+  <h5>
+  <%= f.label :email %>
+  <br>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: " email ", :class=> "text-center text-success border border-success rounded" %>
+  </h5>
   </div>
 
-  <div class="field">
+  <div class="field pb-3">
+  <h5>
+  <%= f.label :username %>
   <br>
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+  <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: " username ", :class=> "text-center text-success border border-success rounded" %>
+  </h5>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -48,39 +55,49 @@
   <% end %>
 
   <div class="field">
-    <br/>
-    <%= f.label :password %>
-    <span><p><i>(leave blank if you do not want to change it)</i></p></span>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
+      <h5>
+      <%= f.label :password %>
+      <br>
+      <%= f.password_field :password, autocomplete: "new-password", :class=> "text-center text-success border border-success rounded" %>
+      </h5>
+      <% if @minimum_password_length %>
       <em><%= @minimum_password_length %> characters min</em>
     <% end %>
+      <span><p><i>(leave blank if you do not want to change it)</i></p></span>
   </div>
 
   <div class="field">
-  <br/>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <h5>
+    <%= f.label :reenter_password %>
+    <br>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", :class=> "text-center text-success border border-success rounded" %>
+    </h5>
   </div>
 
   <div class="field align-center" >
-  <%= f.label :profile_pic %><br />
-   <%= f.file_field :profile_pic,:class => 'align-center'%>
+  <br>
+  <h5>
+   <%= f.label :profile_pic, :class => "pb-0" %><br />
+   <%= f.file_field :profile_pic, placeholder: "profile pic",:class=> "text-center text-success border border-success rounded btn-outline success" %>
+   </h5>
 </div>
 
   <div class="field">
-  <br/>
+  <br>
+  <h5>
     <%= f.label :about %><br />
-    <%= f.text_field :about, autofocus: true, autocomplete: "about" %>
+    <%= f.text_area :about, autofocus: true, autocomplete: "about", placeholder: "about", :class=> "text-center text-success border border-success rounded btn-outline success" %>
+    </h5>
   </div>
   <br>
 
   <div class="field">
   <br/>
+  <h5>
     <%= f.label :current_password %> 
-    <p><i>(we need your current password to confirm your changes)</i></p>
+  </h5>
     <%= f.password_field :current_password, autocomplete: "current-password" %>
+    <p><i>(we need your current password to confirm your changes)</i></p>
   </div>
 
   <div class="actions">
@@ -88,6 +105,7 @@
     <%= f.submit "Update", :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
   </div>
 <% end %>
+</div>
 </div>
 
 <div class="row justify-content-center pt-5">
@@ -97,6 +115,6 @@
 <%= link_to "Cancel my account", registration_path(resource_name), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto', data: { confirm: "Are you sure?" }, method: :delete %>
 </div>
 
-<div class="row justify-content-md-center pt-5">
+<div class="row justify-content-md-center pt-5 pb-5">
 <%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 </div>
