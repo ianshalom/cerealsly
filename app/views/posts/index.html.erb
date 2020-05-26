@@ -154,6 +154,8 @@
 
   </div>
 
+  <% end %>
+
 
 
 
@@ -179,6 +181,7 @@
 		</div>
 		<% end %>
 		<%# < Card deck > %>
+
 		<div class="card-deck row justify-content-md-center">
 
 			<% @posts.each do |post| %>
@@ -227,56 +230,7 @@
 
 	</div>
 
-<% else %>
 
-	<div class="container">
-
-		<%# < Card deck > %>
-		<div class="card-deck row justify-content-md-center">
-
-<% @posts.each do |post| %>
-				<div class="col-xs-12 col-sm-6 col-md-4 d-flex align-items-stretch pt-5">
-
-					<%# < Card > %>
-					<div class="card border-success align-items-center mb-3 d-flex flex-column " style="width: 18rem;">
-
-    				<!--Card image-->
-    				<div>
-
-							<%= image_tag (post.img_url), style: 'width: 200px; height: 170px', :class => 'pt-3 img-fluid' %>
-
-						</div>
-
-						<!--Card content-->
-						<div class="card-body text-center d-flex flex-column align-items-center">
-
-							<!--Title-->
-							<h5 class="card-title pt-3"><%= post.title %></h5>
-
-							<!--Text-->
-							<p class="card-text"><%= truncate(post.body, length: 35) %></p>
-
-
-							<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
-
-							<br>
-
-							<%# < View button, stretched link makes whole div clickable > %>
-							<%= link_to 'View', post_path(post), :class => 'btn btn-outline-light rounded-pill btn-sm mt-auto stretched-link' %>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			<% end %>
-
-		</div>
-
-	</div>
-
-	<% end %>
 
   <div class="flickr_pagination mt-4">
 		    <%= will_paginate @posts, :container => false %>
