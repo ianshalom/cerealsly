@@ -202,7 +202,7 @@
 							<h5 class="card-title pt-3"><%= post.title %></h5>
 
 							<!--Text-->
-							<p class="card-text"><%= post.body %></p>
+							<p class="card-text"><%= truncate(post.body, length: 35) %></p>
 
 								<small><%= post.likes.count %> <%= (post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
 
@@ -254,7 +254,7 @@
 							<h5 class="card-title pt-3"><%= post.title %></h5>
 
 							<!--Text-->
-							<p class="card-text"><%= post.body %></p>
+							<p class="card-text"><%= truncate(post.body, length: 35) %></p>
 
 
 							<small class="card-text mt-auto ">Created <%= time_ago_in_words(post.created_at) %> ago by <%=(post.user.username) %></small>
