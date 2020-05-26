@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.order("posts.created_at DESC").paginate(page: params[:page], per_page: 6)
+    @posts = Post.order("posts.created_at DESC").paginate(page: params[:page], per_page: 9)
 
     @like = Like.group('post_id').order('count(*) DESC').limit(1).pluck(:post_id).first
 
