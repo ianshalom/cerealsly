@@ -171,7 +171,9 @@
 		    <div class="card-body">
 		      <h5 class="mb-3"><%= @post.title %></h5>
 		      <p class="mb-3"><%= @post.body %></p>
-		      <small class="card-text mt-auto ">Created <%= time_ago_in_words(@post.created_at) %> ago by <%=(@post.user.username) %></small>
+		      <small><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></small><br>
+		      <small class="card-text mt-4 ">Created <%= time_ago_in_words(@post.created_at) %> ago by <%=(@post.user.username) %></small><br>
+		      <%= link_to 'View', post_path(@post), :class => 'btn btn-outline-light rounded-pill btn-sm mt-3 stretched-link' %>
 		    </div>
 		  </div>
 		</div>

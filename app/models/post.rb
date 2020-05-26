@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   has_many :comments
-  has_many :likes, dependent: :destroy, counter_cache: true
+  has_many :likes, dependent: :destroy
   belongs_to :user
   has_many :post_categories
   has_many :categories, through: :post_categories
