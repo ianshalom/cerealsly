@@ -189,7 +189,7 @@
 
 
 
-				<small class="blockquote-footer">  <%= @post.user.username %></small>
+				<small class="blockquote-footer">  <%= link_to @post.user.username, profile_path(@post.user) %></small>
 
 
 
