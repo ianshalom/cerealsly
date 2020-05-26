@@ -128,20 +128,29 @@
 			<h2 id="greeting"><%= @user.username %></h2>
 
 
-	<% if @user.profile_pic != nil %>
+	<% if @user.profile_pic == nil %>
 		<div>
-		<%= image_tag (@user.profile_pic), style: 'width: 200px; height: 170px', :class => 'pt-3 rounded-circle' %>
-		<% end %>
+		<%= image_tag ('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQR44Cjeu7UoYxGbfwbmsMR4apa6A53miwHzQYjFHKyTyx98Sb9&usqp=CAU'), style: 'width: 200px; height: 170px', :class => 'pt-3 rounded-circle' %>
 		</div>
-
-
 		<div>
 		<br>
 		<%= @user.about%>
 		</div>
-		</div>
 
-	<div>
+		<%else%>
+
+		<div>
+		<%= image_tag (@user.profile_pic), style: 'width: 200px; height: 170px', :class => 'pt-3 rounded-circle' %>
+		</div>
+		<div>
+		<br>
+		<%= @user.about%>
+		</div>
+		
+		<% end %>
+		<div>
+	
+		
 	<%if current_user == @user%>
 	<div class="row justify-content-md-center pt-5">
 	<%= link_to 'Update Your Info', edit_user_registration_path(current_user), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
