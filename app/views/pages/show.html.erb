@@ -48,7 +48,7 @@
 
 						<li class="nav-item">
 
-			        <%= link_to @user.username, profile_path(@user.id), class: 'nav-link text-success pr-4' %>
+			        <%= link_to current_user.username, profile_path(current_user), class: 'nav-link text-success pr-4' %>
 
 						</li>
 
