@@ -5,7 +5,9 @@ class PostsController < ApplicationController
 
     @like = Like.group('post_id').order('count(*) DESC').limit(1).pluck(:post_id).first
 
+    if @like
     @post = Post.find(@like)
+    end
 
     puts '######################'
     # puts @post
