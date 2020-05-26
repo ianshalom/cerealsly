@@ -29,19 +29,8 @@
 								 Shelves
 
 							</a>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-								<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
-
-								<% Category.all.each do |category| %>
-
-								<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
-
-							  <% end %>
-
-							</div>
-
-<!-- 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
 
@@ -51,7 +40,7 @@
 
 								  <% end %>
 
-								</ul> -->
+								</ul>
 
 						</li>
 
@@ -106,20 +95,7 @@
 
 								 Shelves
 
-							</a>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-
-									<%= link_to 'All Shelves', categories_path, class: 'dropdown-item' %>
-
-									<% Category.all.each do |category| %>
-
-									<%= link_to "#{category.name}", category_path(category), class: 'dropdown-item' %>
-
-								  <% end %>
-
-								</div>
-
-<!-- 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
 									<li><%= link_to 'All Shelves', categories_path, class: 'nav-link' %></li>
 
@@ -129,7 +105,7 @@
 
 								  <% end %>
 
-								</ul> -->
+								</ul>
 
 						</li>
 
@@ -320,7 +296,7 @@
 
 
 		<div class="row justify-content-md-center pt-5 pb-5">
-		  
+
 			<%= link_to 'Back', url_for(:back), :class => 'btn btn-outline-success rounded-pill btn-sm mt-auto' %>
 
 
