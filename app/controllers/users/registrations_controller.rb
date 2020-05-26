@@ -28,9 +28,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+    uploaded_file = params[:user][:profile_pic].path
+    puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+    puts uploaded_file
+    cloudnary_file = Cloudinary::Uploader.upload(uploaded_file)
+    @user.profile_pic = cloudnary_file["url"]
+
+    @user.save
+  end
 
   # DELETE /resource
   # def destroy

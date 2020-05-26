@@ -64,11 +64,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="field">
-  <br/>
-    <%= f.label :profile_pic %><br />
-    <%= f.text_field :profile_pic, autofocus: true, autocomplete: "profile_pic" %>
-  </div>
+  <div class="field align-center" >
+  <%= f.label :profile_pic %><br />
+   <%= f.file_field :profile_pic,:class => 'align-center'%>
+</div>
 
   <div class="field">
   <br/>
