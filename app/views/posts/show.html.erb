@@ -132,7 +132,7 @@
 
 			<%= image_tag (@post.img_url), style: 'width: 450px; height: 450px', class: "img-fluid border border-success rounded bg-white" %><br><br>
 
- 		<% if current_user.id == @post.user_id %>
+ 		<% if current_user == @post.user %>
 
 			<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-outline-success rounded-pill btn-sm w-25' %>
 
@@ -162,14 +162,13 @@
 
 
 			<!--Likes-->
-
-				<% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
-					<% if pre_like %>
-					  <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
-					<% else %>
-					  <%= button_to 'Like', post_likes_path(@post), method: :post %>
-					<% end %>
-				<small><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
+			<% pre_like = @post.likes.find { |like| like.user == current_user} %>
+				<% if pre_like %>
+				  <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+				<% else %>
+				  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+				<% end %>
+			<small><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></small>
 
 
 			<% if @post.categories.any? %>
